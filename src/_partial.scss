@@ -1,0 +1,35 @@
+@import './theme.scss';
+
+/* ========================== primary color ====================== */
+$mat-primary-main :map-get($mat-primary,'main' );
+$mat-primary-lighter :map-get($mat-primary,'lighter' );
+$mat-primary-darker :map-get($mat-primary,'darker' );
+$mat-primary-200 :map-get($mat-primary,'200' );
+/* ========================== Accent color ====================== */
+$mat-accent-main :map-get($mat-accent,'main' );
+$mat-accent-lighter :map-get($mat-accent,'lighter' );
+$mat-accent-darker :map-get($mat-accent,'darker' );
+$mat-accent-200 :map-get($mat-accent,'200' );
+/* ========================== warn color ====================== */
+$mat-warn-main :map-get($mat-warn,'main' );
+// $mat-warn-lighter :map-get($mat-warn,'lighter' );
+$mat-warn-darker :map-get($mat-warn,'darker' );
+$mat-warn-200 :map-get($mat-warn,'200' );
+
+$mat-warn-lighter :#eee5d370;
+$light-sky-blue :#78B2FE;
+$light-sky-blue-left :#5DA3FF;
+$dark-sky-blue :#3A6CC1;
+$ultra-light-gray:#F2F2F2;
+$light-gray:#F5F5F5;
+$deep-light-gray:	#BBBBBB;
+$gray:gray;
+
+
+
+// $danger-color:#3C6CC1;
+
+$online-true:#80E279;
+// $online-false:#BBBBBB;
+$online-false:$mat-warn-main;
+$danger:#E55A5A;

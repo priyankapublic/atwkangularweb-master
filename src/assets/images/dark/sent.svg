@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="121" height="121" viewBox="0 0 121 121">
+  <g id="Group_9944" data-name="Group 9944" transform="translate(-130.495 -250.505)">
+    <g id="Group_9943" data-name="Group 9943" transform="translate(137.995 258.005)">
+      <g id="Ellipse_11" data-name="Ellipse 11" transform="translate(22.425 22.423)" fill="none" stroke="#124a91" stroke-width="7.5">
+        <circle cx="30.577" cy="30.577" r="30.577" stroke="none"/>
+        <circle cx="30.577" cy="30.577" r="34.327" fill="none"/>
+      </g>
+      <g id="Ellipse_12" data-name="Ellipse 12" transform="translate(11.213 11.212)" fill="none" stroke="#3a6cc1" stroke-width="7.5">
+        <circle cx="41.788" cy="41.788" r="41.788" stroke="none"/>
+        <circle cx="41.788" cy="41.788" r="45.538" fill="none"/>
+      </g>
+      <g id="Ellipse_19" data-name="Ellipse 19" fill="none" stroke="#78b2fe" stroke-width="7.5">
+        <circle cx="53" cy="53" r="53" stroke="none"/>
+        <circle cx="53" cy="53" r="56.75" fill="none"/>
+      </g>
+    </g>
+    <path id="Path_443" data-name="Path 443" d="M1550.03,2834.827l-29.491-8.521,105.114-37.642Z" transform="translate(-1382.479 -2514.498)" fill="#fff" fill-rule="evenodd"/>
+    <path id="Path_444" data-name="Path 444" d="M1546.083,2845.86l-.627-11.033,75.623-46.164-65.356,50.424-4.247,11.559-.77-.556-1.061-.821-1.187-.985-1.274-1.27Z" transform="translate(-1377.904 -2514.498)" fill="#e2bc79" fill-rule="evenodd"/>
+    <path id="Path_445" data-name="Path 445" d="M1555.972,2852.1l1.323.707,1.262.6,64.706-64.736-65.356,50.424-4.248,11.554,1.131.748Z" transform="translate(-1380.09 -2514.498)" fill="#a3adb7" fill-rule="evenodd"/>
+    <path id="Path_446" data-name="Path 446" d="M1619.486,2788.663l-28.417,64.28-36.939-13.856Z" transform="translate(-1376.312 -2514.498)" fill="#fff" fill-rule="evenodd"/>
+  </g>
+</svg>
