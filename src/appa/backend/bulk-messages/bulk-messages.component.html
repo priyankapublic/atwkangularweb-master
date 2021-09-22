@@ -1,0 +1,39 @@
+<div class="outer">    
+    <div class="sidenav-right">
+   
+        <form #feedBack="ngForm" class="form" (ngSubmit)="bulkMessageSend(feedBack);feedBack.form.reset()">
+            <!-- --------------------------------------- -->
+            <br>
+            <br>
+            <!-- <p class="label">Subject</p>
+            <div class="tooltip" *ngIf="sub?.touched && sub?.errors?.required">
+                <span class="tooltiptext">This field is required</span>
+            </div>
+         
+            <div class="input-container mb-last-nput">
+                <input #sub="ngModel" type="text" class="input-field {{theme}}" ngModel name="subject" required>
+            </div> -->
+            <p class="label">Comments</p>
+            <div class="tooltip" *ngIf="com?.touched && com?.errors?.required">
+                <span class="tooltiptext">This field is required</span>
+            </div>
+        
+            <div class="input-container mb-last-nput">
+                <textarea rows="6" #com="ngModel" type="text" class="input-field {{theme}}" ngModel name="comment"
+                    required> </textarea>
+            </div>
+
+            <!-- --------------------------------------- -->
+
+
+            <button mat-flat-button color="warn" type="submit" [disabled]="!feedBack.valid"><span
+                    class="btn-text">SUBMIT</span></button>
+            <br>
+
+
+            <br>
+
+        </form>
+    
+</div>
+</div>

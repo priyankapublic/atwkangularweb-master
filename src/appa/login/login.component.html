@@ -1,0 +1,80 @@
+<div [class.theme-alternate]="theme">
+    <div class="main-container">
+        <mat-sidenav-container class="example-sidenav-container">
+
+
+            <div class="full-height" fxFlex="auto" fxLayout="column" fxLayout.sm="column" fxLayout.xs="column">
+                <div fxFlex="auto" fxLayoutAlign="space-around center">   
+                    <div  fxFlex="25%" fxFlex.md="35%" fxFlex.sm="45%" fxFlex.xs="90%" >          
+                    <form class="form" #tempForm="ngForm" (ngSubmit)="login(tempForm)">
+                        <h1 class="text-center"> 
+                                <img fxHide="{{theme}}" class="large-logo" src="assets/images/light/splash_light.svg">
+                            <img fxHide="{{!theme}}" class="large-logo" src="assets/images/dark/splash_light.svg">
+                        
+                        </h1>
+                        <div class="input-container">
+                            <img  class=" icon icon-img" src="assets/images/common/email.svg">
+                            <input type="email" class="input-field {{theme}}" ngModel name="username" [(ngModel)]="email"
+                            placeholder="Email"   required>
+                        </div>
+
+                        <div class="input-container mb-last-nput">
+                            <img class=" icon icon-img" src="assets/images/common/key.svg">
+                            <input type="password" class="input-field {{theme}}" ngModel placeholder="Password" name="password"
+                                [(ngModel)]="pass" required>
+                        </div>
+               
+
+                        <button mat-flat-button color="warn" class="mt-2" [disabled]="!tempForm.valid" type="submit">LOGIN</button>
+                        <br><br><br>
+                        <div fxLayout="row" fxLayoutAlign="space-around center">
+                            <hr fxFlex="40%"> <span class="or-{{theme}}"> or </span>
+                            <hr fxFlex="40%">
+                        </div>
+                        <br>
+                        <div class="wrap-text mat-text">
+                            <h5 class="mat-h5"><span class="mat-text">Don't have Account ? </span><span class="register mat-text"
+                                    routerLink="../register">Register</span></h5>
+                            <h5 class="mat-h5 sky-blue-text  text-center cursor-pointer" routerLink="../how-to-use"><span class="mat-text under-line">How to use</span>
+
+
+                            </h5>
+                            <h5 class="mat-h5 sky-blue-text cursor-pointer" routerLink="../reactivate" ><span class="mat-text">Reactivate Account ?</span><span class="forgot sky-blue-text"
+                                    routerLink="../forgot-password"><span class="mat-text">Forgot Password</span></span></h5>
+                            <h6 class=" text-center hide">
+                                <label class="switch switch-flat">
+                                    <input (change)="changeThene()" class="switch-input" type="checkbox"
+                                        [(ngModel)]="theme" name="theme" />
+                                    <span class="switch-label" data-on="Dark" data-off="Light"></span>
+                                    <span class="switch-handle"></span>
+                                </label>
+                            </h6>
+
+                        </div>
+    
+                    </form>
+                   </div>                 
+
+                </div>
+            </div>
+            <!-- ------------------------ -->
+            
+            <div class="toggle-wrap-top">
+                <div class="toggle-wrap">
+                <h1 class="toggle-text">Dark Mode  &nbsp;&nbsp;&nbsp;&nbsp;<span class="toggle-switch">
+                        <input (change)="getChangeTheme()" type="checkbox" id="chkTest" name="chkTest"
+                            [(ngModel)]="theme">
+                        <label for="chkTest">
+                            <span class="toggle-track"></span>
+                        </label>
+                    </span> &nbsp;&nbsp;&nbsp;&nbsp;Light Mode</h1>
+            </div>
+        </div>
+        </mat-sidenav-container>
+    </div>
+
+
+
+
+
+</div>

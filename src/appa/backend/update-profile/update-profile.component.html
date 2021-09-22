@@ -1,0 +1,117 @@
+<div class="outer" *ngIf="!hideform">
+    <div class="sidenav-right" >
+        <form #feedBack="ngForm" class="form" (ngSubmit)="updateProfile(feedBack)">
+            <!-- --------------------------------------- -->
+            <br>
+            <h6 class="text-center">
+                <label for="file-input">
+                    <img class="profile-img" [src]="croppedImage">
+                    <input id="file-input" type="file" class="inputfile" (change)="onSelectChange($event)" />
+                </label> <br>
+            </h6>
+
+            <!-- --------------------------------------- -->
+            <p class="label">General Information</p>
+            <div class="tooltip" *ngIf="name?.touched && name?.errors?.required">
+                <span class="tooltiptext">This field is required</span>
+            </div>
+            <div class="input-container mb-first-nput">
+                <img class=" icon-other icon-top icon-other-img" src="assets/images/common/user.svg">
+                <input #name="ngModel" type="email" class="input-field-other input-field-top {{theme}}" [(ngModel)]="user.name"
+                    name="name" required placeholder="Name">
+            </div>
+            <!-- --------------------------------------- -->
+
+            <div class="tooltip" *ngIf="email?.touched && email?.errors?.required">
+                <span class="tooltiptext">This field is required</span>
+            </div>
+            <div class="tooltip" *ngIf="email?.touched && email?.invalid && !email?.errors?.required">
+                <span class="tooltiptext">Invalid Email</span>
+            </div>
+            <div class="input-container">
+                <img class=" icon-other icon-other-img" src="assets/images/common/email.svg">
+                <input #email="ngModel" type="email" class="input-field-other  {{theme}}" [(ngModel)]="user.email" name="email" email
+                    required placeholder="emailexample@gmail.com">
+            </div>
+
+            <!-- --------------------------------------- -->
+            <div class="tooltip" *ngIf="location1?.touched && location1?.errors?.required">
+                <span class="tooltiptext">This field is required</span>
+            </div>
+
+            <div class="input-container">
+                <img class=" icon-other icon-other-img" src="assets/images/common/location.svg">
+                <select #location1="ngModel" type="text" class="input-field-other  {{theme}}"  name="nationality" [(ngModel)]="user.nationality"> 
+                <option *ngFor="let country of countryList" [value]="country.name">{{country.name}}</option>
+                </select>
+                <!-- <input #location1="ngModel" type="text" class="input-field-other  {{theme}}"  name="nationality" [(ngModel)]="user.nationality"
+                    required placeholder="United Arab Emirates"> -->
+            </div>
+
+            <!-- --------------------------------------- -->
+            <div class="tooltip" *ngIf="location2?.touched && location2?.errors?.required">
+                <span class="tooltiptext">This field is required</span>
+            </div>
+
+
+            <div class="input-container">
+                <img class=" icon-other icon-other-img" src="assets/images/common/location.svg">
+                <input #location2="ngModel" type="text" class="input-field-other  {{theme}}" [(ngModel)]="user.location" name="location"
+                    required placeholder="Abu Dhabi">
+            </div>
+            <!-- --------------------------------------- -->
+            <!-- <div class="tooltip" *ngIf="location2?.touched && location2?.errors?.required">
+                <span class="tooltiptext">This field is required</span>
+            </div>
+
+            <div class="input-container">
+                <img class=" icon-other icon-other-img" src="assets/images/common/location.svg">
+                <input #location2="ngModel" type="text" class="input-field-other  {{theme}}"  name="Nationality"
+                    required placeholder="Abu Dhabi">
+            </div> -->
+            <!-- --------------------------------------- -->
+
+            <div class="tooltip" *ngIf="location?.touched && location?.errors?.required">
+                <span class="tooltiptext">This field is required</span>
+            </div>
+
+            <div class="input-container mb-last-nput">
+                <img class=" icon-other icon-bottom icon-other-img" src="assets/images/common/language.svg">
+                <input #location="ngModel" type="text" class="input-field-other input-field-bottom {{theme}}" [(ngModel)]="user.language"
+                    placeholder="Password" name="language" required placeholder="English">
+            </div>
+            <!-- --------------------------------------- -->
+            <p class="label">About me</p>
+            <div class="input-container textatea">
+                <textarea rows="6" #com="ngModel" type="text" class="input-field-about {{theme}}" [(ngModel)]="user.details" name="details"
+                    required> </textarea>
+            </div>
+
+            <button mat-flat-button color="warn" type="submit" [disabled]="!feedBack.valid"><span
+                    class="btn-text">SAVE</span></button>
+            <br>
+
+
+            <br>
+
+        </form>
+    </div>
+</div>
+<div class="outer" *ngIf="hideform">
+    <div class="sidenav-right sidenav-second"  fxLayoutAlign="space-around center">
+        <div class="crop-wrap" >
+            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+            [aspectRatio]="1 /1" [resizeToWidth]="300" [resizeToHeight]="300"
+            (imageCropped)="imageCropped($event)"></image-cropper>
+        </div>
+    </div>
+    <div class="subject-detail-wrap">
+        <div class="cancel-half">
+            <button mat-stroked-button color="warn" (click)="cancel()">Cancel</button>
+        </div>
+        <div class="cancel-half">
+            <button mat-raised-button color="warn" type="submit" (click)="apply()">Apply</button>
+        </div>
+    </div>
+
+</div>

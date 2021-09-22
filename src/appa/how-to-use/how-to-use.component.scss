@@ -1,0 +1,90 @@
+
+@import '../../partial';
+.outer-wrap {
+
+}
+.btn-wrap {
+  width: 100%;
+  height: 100%;
+}
+
+.btn-wrap img {
+  width: 35px;
+    position: relative;
+}
+.btn-wrap span {
+  padding: 45vh 5vh 45vh 5vh;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.btn-wrap .right {
+  right: 0;
+}
+.btn-wrap .left {
+  left: 0;
+}
+.main-wrap {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.main-wrap img {
+  max-height: 100%;
+  max-width: 100vw;
+  margin: 0 auto;
+    display: block;
+    top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.point-wrap{text-align: center;font-size: 30px;}
+.point-wrap span {
+  color: #5DA3FF ;
+}
+span.dot-false.active-point {
+  color: #001E50 !important; opacity: .4;
+}
+span.dot-true.active-point {
+  color: #FFFFFF !important;opacity: .4;
+}
+.point-wrap span {
+  margin: 1px;
+}
+.arrow {
+  cursor: pointer;
+  color: $mat-warn-main;
+
+}
+@media only screen and (min-width: 601px) {
+  mat-icon{
+    height: 42px!important;
+    width: 42px!important;
+     font-size: 42px!important;
+  }
+  .btn-wrap span {
+    padding: 45vh 5vh 45vh 5vh;
+  }
+}
+
+.point-wrap{
+  position: absolute;
+  text-align: center;
+  margin: auto;
+  width: 99%;
+  bottom: 0px;
+}
+@media only screen and (max-width: 600px) {
+  .btn-wrap span {
+    padding: 42vh 2vh 45vh 2vh;
+  }
+  .point-wrap{
+    position: absolute;
+    text-align: center;
+    margin: auto;
+    width: 96%;
+    bottom: 0px;
+  }
+}

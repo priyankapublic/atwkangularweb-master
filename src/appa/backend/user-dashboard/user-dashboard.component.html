@@ -1,0 +1,245 @@
+<div class="outer border-right">
+    <mat-toolbar color="{{color}}" class="example-toolbar1">
+        <mat-icon *ngIf="mobileQuery.matches" (click)="closeLeftSideNav()">arrow_back_ios</mat-icon>
+        <div (click)="viewPrfile()" *ngIf="currentUserDetail?.name" class="user-image-wrap curser-pointer">
+            <img *ngIf="theme" class="user-image" src="{{currentUserDetail?.image.darkImage}}" alt=""  (error)="currentUserDetail?.image.darkImage =currentUserDetail?.image.darkImageErr " >
+            <img *ngIf="!theme" class="user-image" src="{{currentUserDetail?.image.lightImage}}" alt=""  (error)="currentUserDetail?.image.lightImage=currentUserDetail?.image.lightImageErr">
+            <span class="{{currentUserDetail?.UserLoginStatus}} online_icon theme-{{theme}}"></span>
+        </div>
+        <span (click)="viewPrfile()" *ngIf="currentUserDetail?.name" class="user-name user-contact-name curser-pointer">
+            &nbsp;&nbsp;&nbsp;{{currentUserDetail?.name}}<br>
+            <span class="cur-date {{currentUserDetail?.UserLoginStatus}}-color" > &nbsp; &nbsp; {{currentUserDetail?.UserLoginStatus}} &#x2022; {{currentUserDetail?.Duration}} </span>
+           
+        </span>
+        <span class="example-fill-remaining-space">
+        </span>
+        <span>
+            <!-- Light <mat-slide-toggle (change)="changeTheme()" class="example-margin" [color]="color" [(ngModel)]="theme">
+                Dark
+            </mat-slide-toggle> -->
+            <button mat-icon-button *ngIf="this.role!='MODERATOR' && currentUserDetail">
+                <mat-icon (click)="displayCheckbox()">create</mat-icon>
+            </button>
+
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu list item">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu list item="matMenu">
+                <button *ngIf="currentUserDetail?.name" mat-menu-item (click)="viewPrfile()">
+                    <span><i class="fa fa-user" aria-hidden="true"></i> &nbsp;&nbsp; Profile </span>
+                </button>
+                <button mat-menu-item (click)="logout()">
+                    <span>Logout &nbsp;&nbsp; <i class="fa fa-sign-out" aria-hidden="true"></i></span>
+                </button>
+            </mat-menu>
+        </span>
+    </mat-toolbar>
+    <!-- ================================ -->
+    <div *ngIf="currentUserDetail">
+    <div class="subject-detail-wrap" *ngIf="!showCheckbox">
+        <div class="subject-detail-left">
+            <h5 class="subject-head">Subject</h5>
+            <h4 title="{{currentUserDetail?.subject}}" class="subject-detail">{{currentUserDetail?.subject}}</h4>
+        </div>
+        <div class="subject-detail-right">
+            <h5 class="subject-head">Ayatollah</h5>
+            <h4 title="{{currentUserDetail?.ayatollah}}" class="subject-detail">{{currentUserDetail?.ayatollah}}</h4>
+        </div>
+    </div>
+
+    <!-- ================================ -->
+    <div class="" [hidden]="selsectedChatType =='doc'">
+        <div id="sidenav"  #scrollMe class="sidenav" [class.sidenav-ch]="expend" appDragDrop (onFileDropped)="uploadFile($event,true)" (dragover)="allowDrop($event)" (dragleave)="clearDrop()" (dragend)="clearDrop()">
+            <div class="scroll-container" [class.hide]="dropImageActive" *ngIf="conversations">
+            <div id="chat-wrap" class="chat-wrap" *ngFor="let con of conversations;index as i;">
+                
+                <div [class.left]="con.From == currentUserDetail.email"
+                    [class.right]="con.From != currentUserDetail.email">
+                    <div class="chat-{{theme}}">
+
+                        <div *ngIf="con.IsVoice == 'Y';else notAudio">
+                            <div class="left-file" *ngIf="con.From == currentUserDetail.email;else elseFile">
+                                <!-- <a [href]="'https://app.askthosewhoknow.org/Download?identifier='+con.Text"><i
+                                        class="fa fa-download" aria-hidden="true"></i> Audio File </a> -->
+                                <audio class="audio" id="audio" controls="">
+                                    <source type="audio/mp3"
+                                        [src]="'https://app.askthosewhoknow.org/Download?identifier='+con.Text">
+                                </audio>
+                              
+                            </div>
+                            <ng-template #elseFile>
+                                <div class="right-file">
+                                    
+                                    <!-- <a [href]="'https://app.askthosewhoknow.org/Download?identifier='+con.Text"> Audio
+                                        File 
+                                        <i class="fa fa-download" aria-hidden="true"></i></a> -->
+                                    <audio class="audio" id="audio" controls="">
+                                        <source type="audio/mp3"
+                                            [src]="'https://app.askthosewhoknow.org/Download?identifier='+con.Text">
+                                    </audio>
+                                    <br>{{con.FileContextText}}
+                                </div>
+                            </ng-template>
+
+                        </div>
+                        <ng-template #notAudio>
+                            <div *ngIf="con.ContentType;else Content">
+                                <div *ngIf="con.ContentType.startsWith('image/');else notImage">
+                                    <div class="left-file" *ngIf="con.From == currentUserDetail.email;else elseFile">
+                                        <a [href]="">
+                                            <img class="chat-image" (click)="viewImg('https://app.askthosewhoknow.org/Download?identifier='+con.Text)"
+                                                [src]="'https://app.askthosewhoknow.org/Download?identifier='+con.Text">
+
+                                        </a>
+                                        <br>{{con.FileContextText}}
+                                    </div>
+                                    <ng-template #elseFile>
+                                        <div class="right-file">
+                                            <a [href]="">
+                                                <img class="chat-image" (click)="viewImg('https://app.askthosewhoknow.org/Download?identifier='+con.Text)"
+                                                    [src]="'https://app.askthosewhoknow.org/Download?identifier='+con.Text">
+
+                                            </a>
+                                            <br>{{con.FileContextText}}
+                                        </div>
+
+                                    </ng-template>
+                                </div>
+                                <ng-template #notImage>
+                                    <div class="left-file" *ngIf="con.From == currentUserDetail.email;else elseFile">
+                                        <a [href]="'https://app.askthosewhoknow.org/Download?identifier='+con.Text">
+                                            <i class="fa fa-download" aria-hidden="true"></i> Doc File </a>
+                                            <br>{{con.FileContextText}}
+                                    </div>
+                                    <ng-template #elseFile>
+                                        <div class="right-file">
+                                            <a [href]="'https://app.askthosewhoknow.org/Download?identifier='+con.Text">
+                                                Doc
+                                                File <i class="fa fa-download" aria-hidden="true"></i></a>
+                                                <br>{{con.FileContextText}}
+                                        </div>
+
+                                    </ng-template>
+                                </ng-template>
+                            </div>
+                            <ng-template #Content>
+                                <span class="text-left" innerHTML="{{con.Text}}"></span>
+                            </ng-template>
+                        </ng-template>
+
+                    </div>
+                    <p class="time">
+                        <span [class.delete-msg.show]="!showCheckbox" class="delete-msg"
+                            *ngIf="con.From != currentUserDetail.email">
+                            <mat-checkbox class="checkbox" color="warn" (click)="deleteId(con.MessageID)">
+                            </mat-checkbox> 
+                            
+                        </span>
+                       <span class="date"> {{con.CreatedDate | date:'dd-MM-yyyy'}} | {{con.CreatedDate | date:'shortTime'}}
+                        <span *ngIf="con.From != currentUserDetail.email">
+                            <span *ngIf="con.IsRead=='Y';else notread ">
+                                <!-- <mat-icon class="readed">done_all</mat-icon> -->
+                                <img  src="assets/images/common/double_tick_blue.svg">
+                            </span>
+                            <ng-template #notread> 
+                            
+                                <span *ngIf="con.MessageStatus=='APPROVE';">
+                                    <img  src="assets/images/common/double_tick_gray.svg">
+                                    <!-- <mat-icon class="approved">done_all</mat-icon> -->
+                                </span>
+                                <span *ngIf="con.MessageStatus=='REJECT';">
+                                    <mat-icon class="rejected">close</mat-icon>
+                                </span>
+                                <span *ngIf="con.MessageStatus=='PEND';">
+                                    <mat-icon class="sended">done</mat-icon>
+                                </span>
+
+                            </ng-template>
+                        </span>
+                    </span>
+                    </p>
+                </div>
+
+            </div>
+                  <br>   
+        </div>
+
+        </div>
+        <!-- ======================= -->
+        <div class="subject-detail-wrap" *ngIf="showCheckbox">
+            <div class="cancel-half">
+                <button mat-stroked-button color="warn" (click)="cancelDelete()">Cancel</button>
+            </div>
+            <div class="cancel-half">
+                <button [disabled]="idArray.length == 0" mat-raised-button color="warn" (click)="delMessage()">Delete</button>
+            </div>
+        </div>
+        <!-- ===================== -->
+
+        <mat-menu #menuFile="matMenu" class="warn-menu-wrap" yPosition="above">
+           
+           <label mat-menu-item> <img class="doc-icon" src="assets/images/common/ic_document.png" > <span class="menu-text" >Document</span>
+                <input  #doc id="doc" class="form-control hide-file" type="file" name="doc" required (change)="uploadFile($event.target.files,true)" accept=".doc, .docx,.pdf">
+            </label>
+
+             <label mat-menu-item> <img class="doc-icon" src="assets/images/common/ic_camera.png" > <span class="menu-text" >Photo Library</span> 
+                <input #image  id="image" class="form-control hide-file" type="file" name="image" required  (change)="uploadFile($event.target.files,true)" accept=".png,.jpg,.jpeg">
+            </label>          
+            
+             <label mat-menu-item> <img class="doc-icon" src="assets/images/common/ic_microphone.png" > <span class="menu-text" >Audio</span> 
+                <input #image  id="image" class="form-control hide-file" type="file" name="image" required (change)="uploadFile($event.target.files,true)" accept=".mp3">
+            </label>
+        
+     
+            <!-- <button  (click)="recordVoice()"  mat-menu-item class="warn-menu"><span class="menu-text"><img class="doc-icon" src="assets/images/common/ic_microphone.png" > <label>Voice</label> </span></button> -->
+
+            
+
+
+        </mat-menu>
+        <div *ngIf="this.role!='MODERATOR'" class="input-wrap">
+            <p class="full-width cursor-pointer" (click)="expendTextBox()">  <img *ngIf="showPull"  class="pull-push"  [class.pull-push-ch]="expend"  [src]="pullImageUrl"></p>
+            <div class="input-container" [class.input-container-ch]="expend || showPull">
+              
+                <img  [matMenuTriggerFor]="menuFile" class=" icon-left icon-img attachment-icon" [class.icon-top-ch]="expend" src="assets/images/common/attachment_icon.svg">
+                <textarea  #myTextAreaRef (keyup)="showPullFun()" (keydown.enter)="sendTextChat($event);" (keydown.shift.enter)="shiftAndEnterkeypressed()" (keyup)="chkenter()" [rows]="rows" type="text" class="input-field-middle" [(ngModel)]="chatText" name="chatText" placeholder="Type Message Here "> </textarea>
+                <img *ngIf="!!chatText" [class.icon-top-ch]="expend" (click)="sendTextChat($event)" class="icon-right icon-img attachment-icon cursor-pointer" src="assets/images/common/send_icon.svg">
+                <img *ngIf="!chatText" [class.icon-top-ch]="expend" (click)="recordVoice()" class="icon-right icon-img attachment-icon cursor-pointer" src="assets/images/common/mic_icon.svg">
+            </div>
+        </div>  
+    </div>
+    
+
+    <div [hidden]="selsectedChatType !='doc'" class="doc-wrap">
+            <ngx-doc-viewer *ngIf="documentFileType=='pdf'" disableContent="all" style="overflow: hidden;" class="sidenav" [url]="url" viewer="pdf" ></ngx-doc-viewer>
+            <ngx-doc-viewer *ngIf="documentFileType!='pdf'" disableContent="all" style="overflow: hidden;" class="sidenav" [url]="url" viewer="mammoth" ></ngx-doc-viewer>
+            <div class="bottom-action-wrap">
+                <div class="half">
+                    <button class="left-btn" mat-raised-button color="warn" type="submit" (click)="sendDoc()" >Send</button>
+                </div>
+                <div class="half">
+                    <button class="right-btn" mat-stroked-button color="warn" (click)="cancelDoc()" >Cancel</button>
+                </div>
+            </div>
+    </div> 
+</div>
+
+<div class="sidenav" *ngIf="!currentUserDetail" fxLayoutAlign="space-around center">
+    <div class="scroll-container">
+        <h1 class="text-center"> 
+        <img fxHide="{{theme}}" class="large-logo" src="assets/images/light/splash_light.svg">
+        <img fxHide="{{!theme}}" class="large-logo" src="assets/images/dark/splash_light.svg">            
+         </h1>
+         <br>
+         <br>
+         <br>
+         <div class="store-wrap"> 
+            <img (click)="openStoreGoogle()"  class="google-play" src="assets/images/common/google_play.png">
+            <img (click)="openStoreIos()" class="ios-play" src="assets/images/common/ios_play.png">            
+         </div>
+    </div>
+</div>
+
+</div>
+
+

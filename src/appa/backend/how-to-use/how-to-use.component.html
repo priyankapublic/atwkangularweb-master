@@ -1,0 +1,28 @@
+
+
+
+<div class="outer">
+    <div class="sidenav-right" >
+      <div class="main-wrap">
+     
+        <span class="left" (click)="prev()" ><mat-icon>keyboard_arrow_left</mat-icon></span>
+        <img class="responsive" [src]="url" (swipeleft)="next()" (swiperight)="prev()">
+        <span class="right" (click)="next()" ><mat-icon>keyboard_arrow_right</mat-icon></span>
+
+        <div class="point-wrap">
+          <span [class.active-point]="selccted==0" class="dot-{{theme}}">&#x2022;</span>
+          <span [class.active-point]="selccted==1" class="dot-{{theme}}">&#x2022;</span>
+          <span [class.active-point]="selccted==2"  class="dot-{{theme}}">&#x2022;</span>
+          <span [class.active-point]="selccted==3"  class="dot-{{theme}}">&#x2022;</span>
+          <span [class.active-point]="selccted==4" class="dot-{{theme}}">&#x2022;</span>
+          <span [class.active-point]="selccted==5" class="dot-{{theme}}">&#x2022;</span>
+          <span [class.active-point]="selccted==6" class="dot-{{theme}}">&#x2022;</span>
+          <span [class.active-point]="selccted==7" class="dot-{{theme}}">&#x2022;</span>
+          <span [class.active-point]="selccted==8" class="dot-{{theme}}">&#x2022;</span>
+          <span [class.active-point]="selccted==9" class="dot-{{theme}}">&#x2022;</span>
+          <span [class.active-point]="selccted==10" class="dot-{{theme}}">&#x2022;</span>
+          <span [class.active-point]="selccted==11" class="dot-{{theme}}">&#x2022;</span>
+       </div> 
+      </div>
+    </div>
+  </div>

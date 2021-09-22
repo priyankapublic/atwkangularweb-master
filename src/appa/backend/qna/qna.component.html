@@ -1,0 +1,77 @@
+<div class="outer border-right">
+    <mat-toolbar color="{{color}}" class="example-toolbar1">
+        <mat-icon *ngIf="mobileQuery.matches" (click)="closeLeftSideNav()">arrow_back_ios</mat-icon>
+        <div  class="user-image-wrap" *ngIf="currentUserDetail">
+        <img *ngIf="theme"  class="user-image" src="{{currentUserDetail?.scholar_image}}" alt="User Image" onError="this.src='assets/images/dark/s_m.svg'">
+        <img *ngIf="!theme" class="user-image" src="{{currentUserDetail?.scholar_image}}" alt="User Image" onError="this.src='assets/images/light/s_m.svg'">
+       </div>
+        <span  class="user-name user-contact-name"> &nbsp;&nbsp;&nbsp;{{currentUserDetail?.scholar}}<br>
+            <span class="cur-date" *ngIf='currentUserDetail?.count>0'> &nbsp;&nbsp;&nbsp;&nbsp;<img  src="assets/images/common/eye_gold.svg" class="eye"> &nbsp;{{currentUserDetail?.count}}</span>    
+        
+        
+        
+        
+        </span>
+        <span class="example-fill-remaining-space" >    
+            <span *ngIf="currentUserDetail">
+            <img *ngIf="currentUserDetail?.is_liked" (click)="dislike()" src="assets/images/common/fav_icon.png" class="fav-icon ">
+            <img *ngIf="!currentUserDetail?.is_liked && theme" (click)="like()" src="assets/images/dark/fav_icon.png" class="fav-icon ">
+            <img *ngIf="!currentUserDetail?.is_liked && !theme" (click)="like()" src="assets/images/light/fav_icon.png" class="fav-icon ">
+           </span>  
+        </span>
+
+        <span>
+    
+            <!-- Light <mat-slide-toggle (change)="changeTheme()" class="example-margin" [color]="color" [(ngModel)]="theme">
+                Dark
+            </mat-slide-toggle> -->
+
+            <button  *ngIf="currentUserDetail" mat-icon-button >
+                <mat-icon (click)="copyText(deepLinkUrl)">share</mat-icon>
+            </button>
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu list item">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu list item="matMenu">
+                <button mat-menu-item (click)="logout()">
+                    <span>Logout <i class="fa fa-sign-out" aria-hidden="true"></i></span>
+                </button>
+            </mat-menu>
+        </span>
+    </mat-toolbar>
+    <!-- ================================ -->
+    <div class="subject-detail-wrap" *ngIf="currentUserDetail" >
+        <h5  class="detail-h5"> <span class="subject-head mr-sub">Subject </span> 
+            <span title="{{currentUserDetail?.subject}}" class="subject-detail" [innerHTML]="currentUserDetail?.subject"></span>
+        </h5>
+        <h5 class="detail-h5"> <span  class="subject-head mr-det"> Ayatollah</span>
+            <span title="{{currentUserDetail?.ayatollah}}" class="subject-detail ">{{currentUserDetail?.ayatollah}}</span>
+        </h5>   
+    </div>
+     <!-- ================================ -->
+    <div class="">
+        <div class="sidenav" *ngIf="currentUserDetail">
+            <div class="chat-wrap" *ngFor="let data of currentUserDetail?.data;index as i" >
+                <div class="question" #ques [innerHTML]="data.question"> </div>    <br>        
+                <div class="answer" #ans [innerHTML]="data.answer"> </div>  <br>   
+        
+            </div>
+        
+        </div>
+        <div class="sidenav" *ngIf="!currentUserDetail" fxLayoutAlign="space-around center">
+            <div class="scroll-container">
+                <h1 class="text-center"> 
+                <img fxHide="{{theme}}" class="large-logo" src="assets/images/light/splash_light.svg">
+                <img fxHide="{{!theme}}" class="large-logo" src="assets/images/dark/splash_light.svg">            
+                 </h1>
+                 <br>
+                 <br>
+                 <br>
+                 <div class="store-wrap"> 
+                    <img (click)="openStoreGoogle()"  class="google-play" src="assets/images/common/google_play.png">
+                    <img (click)="openStoreIos()" class="ios-play" src="assets/images/common/ios_play.png">            
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>

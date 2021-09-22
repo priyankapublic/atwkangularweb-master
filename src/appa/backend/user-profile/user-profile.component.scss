@@ -1,0 +1,123 @@
+
+@import '../../../partial';
+.user-mame{
+    font-size: 20px;
+    font-family:SF Text Light ;
+    margin: 0px 10px !important;
+    text-align: center;
+}
+
+
+.label{
+    font-size: 14px;
+    font-family:SF Text Regular ;
+    opacity: .4;
+    margin: 0px !important;
+}
+.label-detail{
+    font-size: 16px;
+    font-family:SF Text Light ;
+    margin: 0px !important;
+}
+
+  .large{
+      width: 90% !important;
+  }
+  img.user-image.ng-star-inserted {
+    width: 120px;
+    height:  120px;
+   
+}
+.user-image-wrap{
+    text-align: center;
+ 
+}
+
+  .cancel-half{
+    width: 44%;
+    margin-right: 3%;
+    display: inline-block;  
+    
+  }
+  .right{float: right;}
+  .left-align{text-align: left;}
+
+
+.under-line{
+border-bottom: 1px solid;
+opacity: .4;
+margin: 40px 0px;
+} 
+.half{
+   
+    margin-bottom: 20px;
+}
+
+
+.position-middle {
+    padding: 18px;
+    min-height: 200px;
+    // border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    // border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.user-image-wrap{
+    width: 120px;
+    margin: auto;
+    height: 120px;
+    margin-bottom: 20px !important;
+    position: relative !important;
+}
+
+
+.cancel-half{
+    vertical-align: text-top!important;
+}
+.position-bottom {
+    z-index: 10000;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    // border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+.Apply {
+    text-align: center;
+    width: 100%;
+}
+button.mat-raised-button.mat-button-base.mat-warn {
+    width: 80%;
+    border-radius: 50px;
+}
+.float-right{
+    float:right;
+  }
+  div.list{
+    width: 100%;
+  }
+  .menu-list{
+    font-size: 18px;
+    font-family: SF Text Regular;
+  }
+  .menu-true{
+    color: #f2f2f2;
+  }
+  p.time {
+    margin: 4px 0px;
+    font-size: 12px;
+    font-family: SF Text Light;
+    color: gray;
+}
+.cancel-half {
+    padding-top: 20px;
+}
+p.time {
+    margin-top: -6px !important;
+}
+span.mat-button-wrapper {
+    color: white!important;
+}
+.user-offline-gray{
+    color: gray;
+}

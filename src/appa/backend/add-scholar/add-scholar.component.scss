@@ -1,0 +1,202 @@
+@import '../../../partial';
+.full-height {
+    height: 100%;
+    // background-color:$mat-accent-darker;
+  }
+  .register{
+      color: red;
+      float: right;
+      cursor: pointer;
+  }
+  h6.text-center {
+    margin-bottom: 8px;
+}
+  #file-input{display: none;}
+
+  img.profile-img {
+
+	width: 120px;
+
+}
+
+img.logo {
+    width: 70%;
+}
+
+mat-hint{
+  color:$mat-warn-main!important;
+}
+
+span.mat-button-wrapper {
+  color: $mat-warn-main!important;
+}
+simple-snack-bar span {
+  color:$mat-warn-main!important;
+}
+.wrap{
+  height: 80%;
+}
+mat-card.mat-card {
+  padding: 50px;
+  
+}
+
+.register{
+  color:$mat-warn-main!important;
+  float: right;
+  cursor: pointer;
+}
+.form-group{
+  width: 100%;
+  
+}
+.form{  
+  margin: 0px auto;
+}
+button.mat-flat-button.mat-button-base {
+  width: 100%;
+  margin: 0px !important;
+  border-radius: 100px !important;
+}
+
+.prefix{
+  margin-right: 15px;
+}
+hr{
+ height: 3px;
+  background-color:  $mat-warn-main; 
+}
+.or {
+  color:  $mat-warn-main; 
+}
+.wrap-text {
+  margin: 10px 30px;
+}
+
+.forgot{
+  float: right;
+  cursor: pointer;
+}
+.sky-blue-text{
+  color: $dark-sky-blue ;
+}
+.mat-h4{
+  cursor: pointer;
+}
+
+
+
+	// ======================= tool tip
+
+	.tooltip {
+		position: absolute;
+		display: inline-block;
+		border-bottom: 1px dotted black;
+	  }
+	  
+	  .tooltip .tooltiptext {
+
+		width: 180px;
+		background-color: black;
+		color: #fff;
+		text-align: center;
+		border-radius: 6px;
+		padding: 5px 0;
+		position: absolute;
+		z-index: 1;
+		bottom: 150%;
+		left: 50%;
+		margin-left: 160px;
+	  }
+	  
+	  .tooltip .tooltiptext::after {
+		content: "";
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		margin-left: -5px;
+		border-width: 5px;
+		border-style: solid;
+		border-color: black transparent transparent transparent;
+    }
+    ::placeholder {
+      color:#A3ADB7;
+      opacity: 1; /* Firefox */
+      }
+      
+       :-ms-input-placeholder { /* Internet Explorer 10-11 */
+      color:#A3ADB7;
+      }
+      
+       ::-ms-input-placeholder { /* Microsoft Edge */
+      color:#A3ADB7;
+      }
+
+      	  
+	  .input-field{
+		  background-color: transparent;
+	  }
+	 .icon {
+		background-color: transparent;
+	 }
+	 .input-container {
+		border-radius: 100px;
+  }
+  
+  .subject-detail-wrap{
+    padding: 10px;
+    text-align: center;
+    height: auto !important;
+  }
+  .cancel-half{
+    width: 50%;
+    display: inline-block;
+  
+  }
+  .user-contact-name{
+    width: 600px;
+    white-space: nowrap;    
+    overflow: hidden;
+    text-overflow: ellipsis; 
+  }
+  button.mat-stroked-button.mat-button-base.mat-warn{
+    border: 1px solid $mat-warn-main;
+    border-radius: 50px;
+    color: $mat-warn-main;;
+    width: 90%;
+    }
+    button.mat-raised-button.mat-button-base.mat-warn{
+    border: 1px solid $mat-warn-main;
+    border-radius: 50px;
+    color:white;
+    width: 90%;
+    }
+    .cancel-half{
+      width: 50%;
+      display: inline-block;
+    }
+    button.warn-menu.mat-menu-item {
+      padding: 0p;
+      background-color: $mat-warn-main;
+      text-align: center;
+  }
+  button.warn-menu.mat-menu-item:hover{
+    background-color: $mat-warn-darker;
+  }
+  .subject-detail-wrap.ng-star-inserted {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+  }
+  img.profile-img {
+    border-radius: 50%;
+}
+h1.mat-h1.text-center.text-color-true {
+  margin-top: 20px !important;
+}
+.hide-form{
+  display: none;
+}
+form.form {
+    width: 90%;
+}

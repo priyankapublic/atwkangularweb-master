@@ -1,0 +1,33 @@
+<div  fxFlex="auto" fxLayoutAlign="space-around center">
+    <div class="inner-sidebar" fxFlex="100%">
+        <div class="input-container input-container-{{theme}}"> 
+            <img *ngIf="!theme" class="icon icon-img {{theme}}" src="assets/images/light/search.svg">
+            <img *ngIf="theme" class="icon icon-img {{theme}}" src="assets/images/dark/search.svg">
+            <input [class.field-ch]="!!searchKey" [(ngModel)]="searchKey" type="text" class="input-field {{theme}}" ngModel placeholder="Search"  id="serch" #search >
+            <img *ngIf="!!searchKey" (click)="searchKey=''" class="icon icon-right-close icon-img {{theme}}" src="assets/images/common/close.png">
+            <img  *ngIf="!searchKey && theme" (click)="refressUser()" class="icon icon-right-refresh icon-img {{theme}}" src="assets/images/light/refresh.svg">
+            <img  *ngIf="!searchKey && !theme" (click)="refressUser()" class="icon icon-right-refresh icon-img {{theme}}" src="assets/images/dark/refresh.svg">
+           
+        </div>
+        <cdk-virtual-scroll-viewport itemSize="50" class="sidenav top-sidenav">
+            <div class="user-list" *cdkVirtualFor="let user of scholars | scholarFilter:searchKey">
+                <div class="cursor-pointer" >
+                    <div fxFlex="48px" class="profile-image">
+                        <img *ngIf="theme" class="user-image" (click)="viewImg(user.image.darkImage)" src="{{user.image.darkImage}}" alt="User Image" (error)="user.image.darkImage=user.image.darkImageErr">
+                        <img *ngIf="!theme" class="user-image" (click)="viewImg(user.image.lightImage)" src="{{user.image.lightImage}}" alt="User Image"(error)="user.image.lightImage=user.image.lightImageErr">
+                    <span  class="{{user.UserLoginStatus}} online_icon theme-{{theme}} {{user.UserLoginStatus}}"></span>
+          
+                    </div>
+                    <div fxFlex="auto" class="profile-data" (click)="currentUser(user)">
+                        <h5 cl><span [class.white-text]="theme" class="user-contact-name">{{user.name}}</span></h5>  
+                        <span class="last-login last-login-dur {{user.UserLoginStatus}}-color"> &#x2022; {{user.lastLogin}}</span>                       
+                        <h6><span class="user-contact-last-msg">{{user.nationality}} </span>  </h6>                                         
+                            
+                                 
+                    </div>
+                </div>
+            </div>
+        </cdk-virtual-scroll-viewport>
+    </div>
+    </div>
+    

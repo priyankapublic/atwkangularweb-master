@@ -1,0 +1,141 @@
+<div  fxFlex="auto" fxLayoutAlign="space-around center" *ngIf="showNewChat=='chat-list'" >
+<div class="inner-sidebar" fxFlex="100%" >
+
+    <!-- <div class="wrap-sort">
+        <div class="btn-group active-{{theme}}">
+            <button [class.active]="active.left" [disabled]="active.left" class="btn-sort btn-left" (click)="sort('latest')">Latest</button>
+            <button [class.active]="active.right" [disabled]="active.right" class="btn-sort btn-right" (click)="sort('oldest')">Oldest</button>
+        </div>
+    </div> -->
+    <div class="input-container input-container-{{theme}}">
+        <img *ngIf="!theme" class="icon icon-img {{theme}}" src="assets/images/light/search.svg">
+        <img *ngIf="theme" class="icon icon-img {{theme}}" src="assets/images/dark/search.svg">
+        <input hidden [class.field-ch]="!!searchKey" [(ngModel)]="searchKey" type="text" class="input-field {{theme}}" ngModel placeholder="Search">
+        <input [class.field-ch]="!!searchKey" [(ngModel)]="searchKey" type="text" class="input-field {{theme}}" ngModel placeholder="Search">
+        <img  *ngIf="!!searchKey && searchKey!='Search'" (click)="searchKey=''" class="icon icon-right-close icon-img {{theme}}" src="assets/images/common/close.png">
+        <img  *ngIf="!searchKey && theme" (click)="refressUser()" class="icon icon-right-refresh icon-img {{theme}}" src="assets/images/light/refresh.svg">
+        <img  *ngIf="!searchKey && !theme" (click)="refressUser()" class="icon icon-right-refresh icon-img {{theme}}" src="assets/images/dark/refresh.svg">
+
+        <!-- <span *ngIf="!searchKey" class="refresh-btn cursor-pointer" ><i  (click)="refressUser()" class="fa fa-refresh  spin-{{theme}}" style="font-size:48px"></i></span> -->
+    </div>
+
+    <div class="sidenav top-sidenav">
+      <cdk-virtual-scroll-viewport itemSize="50" class="sidenav top-sidenav">
+        <div class="user-list" *cdkVirtualFor="let user of userList | filter:searchKey ; let i=index;">
+            <div class="cursor-pointer" >
+                <div fxFlex="48px" class="profile-image">
+                    <img *ngIf="theme" class="user-image" (click)="viewImg(user.image.darkImage)" src="{{user.image.darkImage}}" alt="User Image" (error)="user.image.darkImage=user.image.darkImageErr">
+                    <img *ngIf="!theme" class="user-image" (click)="viewImg(user.image.lightImage)" src="{{user.image.lightImage}}" alt="User Image" (error)="user.image.lightImage=user.image.lightImageErr">
+                <!-- <span class="online-{{user.online}} online_icon theme-{{theme}}"></span> -->
+                </div>
+                <div fxFlex="auto" class="profile-data" (click)="currentUser(user,i)">
+                    <h5 cl><span [class.white-text]="theme" class="user-contact-name">{{user.name}}</span></h5>
+                    <!-- <h6><span [class.white-text]="theme"  class="user-contact-subject ">{{user.subject}}</span></h6> -->
+                    <span *ngIf="user.IsRead=='N' && role=='USER' && loginEmail==user.toEmail"  class="last-login isread"></span>
+                    <span *ngIf="user.IsReplied=='N' && role=='ALIM' && loginEmail==user.toEmail"  class="last-login isread"></span>
+                    <h6><span [class.white-text]="theme" class="user-contact-subject">{{user.subject}}</span></h6>
+                    <span class="last-login user-contact-last-login"> &#x2022; {{user.lastLogin}}</span>
+                    <h6><span class="user-contact-last-msg">{{user.lastMessage }} </span></h6>
+                </div>
+            </div>
+        </div>
+        </cdk-virtual-scroll-viewport>
+
+    </div>
+
+</div>
+</div>
+ <!-- ============================================================ -->
+ <div  fxFlex="auto" fxLayoutAlign="space-around center" *ngIf="showNewChat=='new-chat'" >
+<div class="inner-sidebar" fxFlex="100%">
+    <div class="input-wrap">
+    <h5 _ngcontent-woq-c29="" class="subject-head subject-head-{{theme}}">Write Subject and Ayatollah</h5>
+        <input [(ngModel)]="subject" type="text" class="input-field-ch input-field-top" ngModel placeholder="Subject">
+       <input [(ngModel)]="ayatollah" type="text" class="input-field-ch input-field-bottom" ngModel placeholder="Ayatollah">
+
+    </div>
+    <br> <p class="line"></p><br>
+    <h5 _ngcontent-woq-c29="" class="subject-head subject-head-bottom subject-head-{{theme}}">Choose Scholar</h5>
+    <div class="input-container input-container-{{theme}}">
+        <img *ngIf="!theme" class="icon icon-img {{theme}}" src="assets/images/light/search.svg">
+        <img *ngIf="theme" class="icon icon-img {{theme}}" src="assets/images/dark/search.svg">
+        <input [class.field-ch]="!!searchKeyScholar" [(ngModel)]="searchKeyScholar" type="text" class="input-field {{theme}}" ngModel placeholder="Search"  id="serch" #search >
+        <img *ngIf="!!searchKeyScholar" (click)="searchKeyScholar=''" class="icon icon-right-close icon-img {{theme}}" src="assets/images/common/close.png">
+
+    </div>
+    <div class="sidenav bottom-sidenav">
+        <div class="user-list" *ngFor="let user of scholars | scholarFilter:searchKeyScholar; let i = index;">
+        <label for="{{i}}">
+            <div class="cursor-pointer">
+                <div fxFlex="48px" class="profile-image">
+                    <img *ngIf="theme" class="user-image" src="{{user.image.darkImage}}" alt="User Image">
+                    <img *ngIf="!theme" class="user-image" src="{{user.image.lightImage}}" alt="User Image">
+                    <span  class="{{user.UserLoginStatus}} online_icon theme-{{theme}} {{user.UserLoginStatus}}"></span>
+
+                </div>
+                <div fxFlex="auto" class="profile-data">
+                    <h5 cl><span [class.white-text]="theme" class="user-contact-name">{{user.name}}</span></h5>
+                    <h6><span [class.white-text]="theme"  class="user-contact-subject ">{{user.nationality}}</span>
+                    <span class=" last-login-dur {{user.UserLoginStatus}}-color"> &#x2022; {{user.lastLogin}}</span>
+                    </h6>
+                </div>
+                <div  class="radio-wrap"  >
+                    <span class="container">
+                        <input class="radio-{{theme}} input-ch" id="{{i}}" type="radio" name="sli" [(ngModel)]="sli" value="{{i}}" >
+                    </span>
+                </div>
+            </div>
+        </label>
+
+        </div>
+
+    </div>
+    <div class="bottom-action-wrap">
+        <div class="half">
+            <button mat-stroked-button color="warn" (click)="cancelnewChat()">Cancel</button>
+        </div>
+        <div class="half">
+            <button mat-raised-button color="warn" type="submit" (click)="startnewChat()" [disabled]="!subject || !ayatollah || !sli">Start</button>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+
+ <!-- ============================================================ -->
+ <div  fxFlex="auto" fxLayoutAlign="space-around center" *ngIf="showNewChat=='filter'" >
+    <div class="inner-sidebar" fxFlex="100%">
+    <div class="wrap-sort mb24">
+        <div class="btn-group active-{{theme}}">
+            <button [class.active]="active.left" [disabled]="active.left" class="btn-sort btn-left" (click)="sort('latest')">Latest</button>
+            <button [class.active]="active.right" [disabled]="active.right" class="btn-sort btn-right" (click)="sort('oldest')">Oldest</button>
+        </div>
+    </div>
+    <div class="clear-Wrap">
+        <p ><span class="search-tag  search-tag-{{theme}}"> Search tags</span> <span class="claer" (click)="claerAll()" >Clear All</span></p>
+        <span class="label label-{{theme}}">Write Scholar, Subject or Message Text to <br> create a tag</span>
+    </div>
+        <div class="input-container input-container-{{theme}}">
+            <img *ngIf="!theme" class="icon icon-img {{theme}}" src="assets/images/light/search.svg">
+            <img *ngIf="theme" class="icon icon-img {{theme}}" src="assets/images/dark/search.svg">
+            <input [class.field-ch]="!!searchKeyScholar"  type="text" class="input-field {{theme}}" ngModel placeholder="Search"  id="serch" #search >
+            <img *ngIf="!!searchKeyScholar"  class="icon icon-right-close icon-img {{theme}}" src="assets/images/common/close.png">
+
+        </div>
+        <div class="sidenav bottom-sidenav-filter">
+
+
+        </div>
+        <div class="bottom-action-wrap">
+            <div class="half">
+                <button mat-stroked-button color="warn" (click)="cancelfilter()">Cancel</button>
+            </div>
+            <div class="half">
+                <button mat-raised-button color="warn" type="button" (click)="applyFilter()">Apply</button>
+            </div>
+        </div>
+    </div>
+
+    </div>

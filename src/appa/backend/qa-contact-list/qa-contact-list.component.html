@@ -1,0 +1,97 @@
+<div fxFlex="auto" fxLayoutAlign="space-around center">
+    <div *ngIf="!showTagFilter" class="inner-sidebar" fxFlex="100%">
+
+        <div class="input-container input-container-{{theme}}"> 
+            <img *ngIf="!theme" class="icon icon-img {{theme}}" src="assets/images/light/search.svg">
+            <img *ngIf="theme" class="icon icon-img {{theme}}" src="assets/images/dark/search.svg">
+            <input [class.field-ch]="!!searchKey" [(ngModel)]="searchKey" type="text" class="input-field {{theme}}" ngModel placeholder="Search"  id="serch" #search >
+            <img *ngIf="!!searchKey && searchKey!='Search'" (click)="searchKey=''" class="icon icon-right-close icon-img {{theme}}" src="assets/images/common/close.png">
+
+        </div>
+
+        <cdk-virtual-scroll-viewport itemSize="50" class="sidenav top-sidenav">
+            
+            <div class="user-list" *cdkVirtualFor="let qna of qnaList | qnaFilter:searchKey | sort:sortKey  | tagsMainFilter:tagMainKey  | likeFilter:filtertKey ; let i=index;">
+                <div class="cursor-pointer" >
+                    <div fxFlex="48px" class="profile-image">
+                        <img *ngIf="theme" class="user-image" (click)="viewImg(qna.scholar_image)" src="{{qna.scholar_image}}" alt="User Image" onError="this.src='assets/images/dark/s_m.svg'">
+                        <img *ngIf="!theme" class="user-image" (click)="viewImg(qna.scholar_image)" src="{{qna.scholar_image}}" alt="User Image" onError="this.src='assets/images/light/s_m.svg'">
+                    </div>
+                    <div fxFlex="auto" class="profile-data" (click)="currentUser(qna,i)">
+                        <h5><span [class.white-text]="theme" class="user-contact-name"[innerHTML]="qna.subject"></span></h5>
+                        <span
+                            class="last-login user-contact-last-login" [class.gold]="qna.count >0"> 
+                            <img *ngIf="qna.count >0" class="eye" src="assets/images/common/eye_gold.svg">
+                            <img *ngIf="qna.count ==0" class="eye" src="assets/images/common/eye_gray.svg">
+                            {{qna.count}}</span>
+                     
+                        <h6><span class="user-contact-last-msg">{{qna.scholar }}</span></h6>
+                    </div>
+                </div>
+            </div>
+        </cdk-virtual-scroll-viewport>
+    </div>
+
+
+
+
+
+    <div *ngIf="showTagFilter" class="inner-sidebar" fxFlex="100%">
+        <div class="wrap-sort mb24">
+            <div class="btn-group active-{{theme}}">
+                <button [class.active]="active.left" [disabled]="active.left" class="btn-sort btn-left" (click)="sort('latest')">Latest</button>
+                <button [class.active]="active.middle"  [disabled]="active.middle" class="btn-sort btn-middle"(click)="sort('oldest')">Oldest</button>
+                <button [class.active]="active.right" [disabled]="active.right" class="btn-sort btn-right" (click)="sort('views')">Views</button>
+            </div>
+        </div>
+        <div class="clear-Wrap-liked">
+            <p ><span class="search-tag left search-tag-{{theme}}"> Filter by</span></p>
+        </div>
+        <div class="wrap-sort mb24">
+
+            <div class="btn-group active-{{theme}}">
+                <button [class.active]="sortActive.left" [disabled]="sortActive.left" class="btn-filter btn-left" (click)="filter(false)">All</button>
+                <button [class.active]="sortActive.right" [disabled]="sortActive.right" class="btn-filter btn-right" (click)="filter(true)">Liked</button>
+            </div>
+        </div>
+        <div class="clear-Wrap">
+            <p ><span class="search-tag  search-tag-{{theme}}"> Search tags</span> <span class="claer" (click)="claerAll()" >Clear All</span></p>
+            <span class="label label-{{theme}}">Write Scholar, Subject or Message Text to <br> create a tag</span>
+        </div>
+        <div class="input-container input-container-{{theme}}"> 
+            <img *ngIf="!theme" class="icon icon-img {{theme}}" src="assets/images/light/search.svg">
+            <img *ngIf="theme" class="icon icon-img {{theme}}" src="assets/images/dark/search.svg">
+            <input [class.field-ch]="!!searchKey"  [(ngModel)]="searchKeyFilter" type="text" class="input-field {{theme}}" ngModel placeholder="Search"  id="serch" #search >
+            <img *ngIf="!!searchKey" (click)="searchKey=''" class="icon icon-right-close icon-img {{theme}}" src="assets/images/common/close.png">
+
+        </div>
+
+        <cdk-virtual-scroll-viewport itemSize="50" class="sidenav bottom-sidenav">
+                <div class="user-list" *cdkVirtualFor="let tag of tags | tagsFilter:searchKeyFilter;let i=index">
+                    <div> 
+                      <div fxFlex="auto" class="profile-data height">
+                            <label class="mat-h6 dflex " for="{{i}}"><span [class.white-text]="theme"
+                                    class="user-contact-name w80">{{tag.value}}  </span><span
+                                    class="last-login user-contact-last-login">
+                        <span class="container">
+                            <input type="checkbox" id="{{i}}"   [checked]="tag.selected" name="{{tag.value}}" (click)="applyModel(tag.sn)" >
+                            <span class="checkmark"></span>
+                        </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>     
+        </cdk-virtual-scroll-viewport>
+        <!-- ======================= -->
+        <div class="bottom-action-wrap">
+            <div class="half">
+                <button mat-stroked-button color="warn" (click)="cancelTagFilter()">Cancel</button>
+            </div>
+            <div class="half">
+                <button mat-raised-button color="warn" type="button" (click)="applyTagFilter()" >Apply</button>
+            </div>
+        </div>
+
+<!-- ===================== -->
+    </div>

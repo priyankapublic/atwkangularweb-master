@@ -1,0 +1,36 @@
+@import '../../../partial';
+  .message{
+      font-family: SF Text Regular;
+      font-size: 16px; 
+      padding: 18px;
+      color: #FFFFFF;
+      background-color: $dark-sky-blue  !important;
+  }
+  .date-true{
+    font-family:SF Text Regular;
+    font-size: 14px;  
+    color: #FFFFFF;
+    opacity: .4;
+  }
+  .date-false{
+    font-family:SF Text Regular;
+    font-size: 14px;  
+    color: $light-sky-blue  ;
+    opacity: .4;
+  }
+  .notification{
+      margin: 20px;
+  }
+  .message {
+    border-radius: 12px;
+}
+span.cur-date.date-true {
+    display: inline-block;
+    margin-top: 10px;
+}
+span.cur-date.date-false {
+  color: #BBBBBB; opacity: 1;
+}
+.message {
+  white-space: pre-line !important;
+}

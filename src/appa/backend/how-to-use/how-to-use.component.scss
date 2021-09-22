@@ -1,0 +1,56 @@
+
+@import '../../../partial';
+.main-wrap {
+  text-align: center;
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.responsive {
+  width: auto;
+  height: calc(100vh - 150px);
+}
+@media only screen and (max-width: 600px) {
+  .responsive {
+    width: auto;
+    height: calc(100vh - 170px);
+  }
+}
+.point-wrap{text-align: center;font-size: 30px;}
+.point-wrap span {
+  color: #5DA3FF ;
+}
+span.dot-false.active-point {
+  color: #001E50 !important; 
+}
+span.dot-true.active-point {
+  color: #FFFFFF !important;
+}
+.point-wrap span {
+  margin: 1px;
+}
+.right {
+  cursor: pointer;
+  color: $mat-warn-main;
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+}
+.left {
+  color: $mat-warn-main;
+  position: absolute;
+  z-index: 1000;
+  left: 20px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+span.left mat-icon {
+  font-size: 30px;
+}
+span.right mat-icon {
+  font-size: 30px;
+}

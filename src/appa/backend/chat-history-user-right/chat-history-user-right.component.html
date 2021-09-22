@@ -1,0 +1,76 @@
+<div class="outer" *ngIf="!history">
+    <div class="sidenav-right">
+        <div class="cancel-half">
+            <div class="user-image-wrap">
+                <img *ngIf="theme" class="user-image" (click)="viewImg(profile?.image.darkImage)" src="{{profile?.image.darkImage}}" alt="" (error)="profile?.image.darkImage=profile?.image.darkImageErr">
+                <img *ngIf="!theme" class="user-image" (click)="viewImg(profile?.image.lightImage)" src="{{profile?.image.lightImage}}" alt="" (error)="profile?.image.lightImage=profile?.image.lightImageErr">
+                <!-- <span class="online-{{profile?.online}} online_icon_large theme-{{theme}}"></span> -->
+            </div>
+            <!-- <h4 class="user-mame">{{profile?.name}}</h4> -->
+            <h6 class="user-online">Online</h6>
+        </div>
+        <div class="cancel-half  left-align">
+            <h6 class="label">Location</h6>
+            <h5 class="label-detail">{{userdetail?.Location}}</h5><br>
+            <h6 class="label">Country</h6>
+            <h5 class="label-detail">{{userdetail?.Nationality}}</h5><br>
+            <h6 class="label">Language</h6>
+            <h5 class="label-detail">{{userdetail?.Language}}</h5><br>
+            <!-- <h6 class="label">Email</h6>
+            <h5 class="label-detail" innerHTML="{{profile?.email}}"></h5> -->
+        </div>
+        <br>
+
+        <div class="position-middle">
+            <h6 class="label">Specialization</h6>
+            <p class="label-detail"> {{userdetail?.SpecialisationIn}}</p>
+            <br>
+            <h6 class="label">Studied at</h6>
+            <p class="label-detail"> {{userdetail?.StudiesAt}}</p>
+            <br>
+            <h6 class="label">About me</h6>
+            <p class="label-detail"> {{userdetail?.Details}}</p>
+            <br>
+        </div>
+    </div>
+    <div class="position-bottom">
+
+        <div class="subject-detail-wrap">
+
+            <div class="Apply">
+                <button mat-raised-button color="warn" (click)="showHistory()"><span class="white-text">Message History</span></button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- ---------- -->
+<div class="outer" *ngIf="history">
+    <div class="sidenav-right">
+
+        <div class="position-middle" >       
+            <mat-nav-list *ngFor="let msgHis of conversations;index as i;">
+                <a mat-list-item>
+                    <div class="list cursor-pointer menu-{{theme}}" (click)="getConversation(msgHis.Subject,msgHis.From)">
+                        <mat-icon class="float-right ">keyboard_arrow_right</mat-icon>
+                        <span class="menu-list menu-{{theme}}">{{msgHis.Subject}}</span>
+                       
+                        <p class="time"> {{msgHis.CreatedDate | date:'dd-MM-yyyy'}} |
+                            {{msgHis.CreatedDate | date:'shortTime'}}</p>
+
+                    </div>
+                </a>
+            </mat-nav-list>
+        </div>
+
+    </div>
+    <div class="position-bottom">
+
+        <div class="subject-detail-wrap">
+            <div class="Apply">
+                <button mat-raised-button color="warn" (click)="showProfile()"> <span class="white-text">Profile</span></button>
+            </div>
+        </div>
+    </div>
+
+</div>

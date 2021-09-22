@@ -1,0 +1,116 @@
+<div [class.theme-alternate]="theme" *ngIf="show=='main'">
+    <div class="main-container">
+        <mat-sidenav-container class="example-sidenav-container">
+            <div class="outer wrap">
+                <mat-toolbar color="{{color}}" class="example-toolbar1">
+                    <div class="user-image-wrap" >
+                    <img (click)="home()" *ngIf="!theme" class="home-image" src="assets/images/light/home.png">
+                    <img (click)="home()" *ngIf="theme" class="home-image" src="assets/images/dark/home.png">
+                    </div>
+                    <!-- <i (click)="home()"  class="fa fa-home" aria-hidden="true"></i> -->
+                    &nbsp;&nbsp;
+                    <div class="user-image-wrap" *ngIf="currentUserDetail">
+                        <img *ngIf="theme" class="user-image" src="{{currentUserDetail?.scholar_image}}"
+                            alt="User Image" onError="this.src='assets/images/dark/s_m.svg'">
+                        <img *ngIf="!theme" class="user-image" src="{{currentUserDetail?.scholar_image}}"
+                            alt="User Image" onError="this.src='assets/images/light/s_m.svg'">
+                    </div>
+                    <span class="user-name user-contact-name"> &nbsp;&nbsp;&nbsp;{{currentUserDetail?.scholar}}<br>
+                        <span class="cur-date" *ngIf='currentUserDetail?.count>0'> &nbsp;&nbsp;&nbsp;&nbsp;<img
+                                src="assets/images/common/eye_gold.svg" class="eye">
+                            &nbsp;{{currentUserDetail?.count}}</span>
+                    </span>
+                    <span class="example-fill-remaining-space">
+                        <span *ngIf="currentUserDetail">
+                            <span *ngIf="currentUserDetail?.is_liked">
+                                <img  (click)="dislike()" src="assets/images/common/fav_icon.png" class="fav-icon ">
+                            </span>
+                            <span *ngIf="!currentUserDetail?.is_liked">
+                                <img [class.hide]="!theme" (click)="like()" src="assets/images/dark/fav_icon.png" class="fav-icon ">
+                                <img [class.hide]="theme" (click)="like()"src="assets/images/light/fav_icon.png" class="fav-icon ">
+                            </span>
+                        </span>
+                    </span>
+
+                    <span>
+
+                       <button class="not-mobile"  *ngIf="currentUserDetail" mat-icon-button>
+                            <mat-icon (click)="copyText(deepLinkUrl)">share</mat-icon>
+                        </button>
+                        <button class="not-mobile"  *ngIf="currentUserDetail" mat-icon-button>
+                            <mat-icon (click)="wordpressHome()">language</mat-icon>
+                        </button>
+                        <button mat-icon-button [matMenuTriggerFor]="menu"
+                            aria-label="Example icon-button with a menu list item">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu list item="matMenu">
+                            <button class="mobile"   mat-menu-item (click)="wordpressHome()">
+                                <span> <mat-icon  class="white" >language</mat-icon>&nbsp;Web </span>
+                            </button>
+                            <button class="mobile"   mat-menu-item (click)="copyText(deepLinkUrl)">
+                                <span> <mat-icon  class="white" >share</mat-icon>&nbsp;Share</span>
+                            </button>
+                            
+                            <button *ngIf="!logedIn" mat-menu-item (click)="login()">
+                                <span><i class="fa fa-sign-in " aria-hidden="true"></i> &nbsp; &nbsp;Login </span>
+                            </button>
+                            <button *ngIf="logedIn" mat-menu-item (click)="logout()">
+                                <span><i class="fa fa-sign-out " aria-hidden="true"></i> &nbsp; &nbsp;Logout</span>
+                             </button>
+                        </mat-menu>
+                    </span>
+                </mat-toolbar>
+                <!-- ================================ -->
+                <div class="subject-detail-wrap" >
+                    <h5  class="detail-h5"> <span class="subject-head mr-sub">Subject </span>
+                        <span title="{{currentUserDetail?.subject}}" class="subject-detail"
+                            [innerHTML]="currentUserDetail?.subject"></span>
+                    </h5>
+                    <h5  class="detail-h5"> <span class="subject-head mr-det"> Ayatollah</span>
+                        <span title="{{currentUserDetail?.ayatollah}}"
+                            class="subject-detail ">{{currentUserDetail?.ayatollah}}</span>
+                    </h5>
+                </div>
+                <!-- ================================ -->
+                <div class="">
+                    <div class="sidenav" >
+                        <div class="chat-wrap" *ngFor="let data of currentUserDetail?.data;index as i">
+                            <div class="question" #ques [innerHTML]="data.question">
+                            </div>
+                            <br>
+                            <div class="answer" #ans [innerHTML]="data.answer">
+                            </div>
+                            <br>
+                        </div>                
+                    </div>
+                <!-- ================================ -->
+                <div class="wrap-bootom" >
+                    <div class="w33">
+                        <img (click)="openStoreGoogle()"  class="google-play" src="assets/images/common/google_play.png">
+
+                    </div>
+                    <div class="w33">
+                      <div class="toggle-switch">
+                            <input (change)="getChangeTheme()" type="checkbox" id="chkTest" name="chkTest"
+                                [(ngModel)]="theme">
+                            <label for="chkTest">
+                                <span class="toggle-track"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="w33">
+
+                        <img (click)="openStoreIos()" class="ios-play" src="assets/images/common/ios_play.png">   
+                    </div>
+      
+          
+                </div>
+                <!-- ================================ -->
+
+                </div>
+
+            </div>
+        </mat-sidenav-container>
+    </div>
+</div>

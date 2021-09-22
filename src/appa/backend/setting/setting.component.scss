@@ -1,0 +1,81 @@
+
+@import '../../../partial';
+
+.subject-detail-wrap {
+    text-align: center;display: inline-block;
+}
+
+
+// ==========================toggle========
+
+
+.toggle-switch input[type=checkbox] {display:none}
+.toggle-switch label {cursor:pointer;}
+.toggle-switch label .toggle-track {
+ display: inline-block;
+ height:32px;
+ width:52px;
+ background:transparent;
+ border-radius:20px;
+ position:relative;
+ margin-bottom:-13px;
+ border:1px solid #3A6CC1;
+}
+
+.toggle-switch .toggle-track:before{
+  content:'';
+  display:inline-block;
+  height:26px;
+  width:26px;
+  background:#3A6CC1;
+  margin:3px;
+  border-radius:20px;
+  position:absolute;
+  top:0;
+  right:0;
+  transition:right .2s ease-in;
+}
+
+.toggle-switch input[type="checkbox"]:checked + label .toggle-track:before{
+  right:20px;
+}
+.toggle-text{
+    font-size: 12px;
+    font-family:SF Text Medium;
+    text-align: center;
+}
+.btn-img-top{
+    margin-bottom: 10px;
+}
+.toggle-wrap {
+    padding: 20px 0px;
+ }
+.position-middle {
+    padding: 18px;    
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+
+.position-bottom {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.menu-list{
+  font-size: 20px;
+  font-family: SF Text Regular;
+}
+.menu-true{
+  color: $mat-primary-main;
+}
+.menu-true{
+  color:$deep-light-gray;
+}
+span.image-wrap{
+  margin-right: 15px;
+  min-width: 28px;
+}

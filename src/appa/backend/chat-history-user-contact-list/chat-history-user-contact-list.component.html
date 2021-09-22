@@ -1,0 +1,32 @@
+<div  fxFlex="auto" fxLayoutAlign="space-around center">
+    <div class="inner-sidebar" fxFlex="100%">
+        <div class="input-container input-container-{{theme}}"> 
+            <img *ngIf="!theme" class="icon icon-img {{theme}}" src="assets/images/light/search.svg">
+            <img *ngIf="theme" class="icon icon-img {{theme}}" src="assets/images/dark/search.svg">
+            <input [class.field-ch]="!!searchKey" [(ngModel)]="searchKey" type="text" class="input-field {{theme}} " ngModel placeholder="Search"  id="serch" #search >
+            <img *ngIf="!!searchKey" class="icon icon-right icon-img {{theme}}" src="assets/images/common/reject_icon.png">
+        </div>
+        <cdk-virtual-scroll-viewport itemSize="50" class="sidenav top-sidenav">
+            <div class="user-list" *cdkVirtualFor="let user of pendingqueries | pendingQueries:searchKey">
+                <div class="cursor-pointer" >
+                    <div fxFlex="48px" class="profile-image profile-image-left">
+                        <img *ngIf="theme" class="user-image" (click)="viewImg(user.image.darkImage)"  src="{{user.image.darkImage}}" alt="User Image" (error)="user.image.darkImage=user.image.darkImageErr">
+                        <img *ngIf="!theme" class="user-image" (click)="viewImg(user.image.darkImage)" src="{{user.image.lightImage}}" alt="User Image"(error)="user.image.lightImage=user.image.lightImageErr">
+                    <!-- <span class="online-{{user.online}} online_icon theme-{{theme}}"></span> -->
+                    </div>
+                    <div fxFlex="48px" class="profile-image">
+                        <img *ngIf="theme" class="user-image" (click)="viewImg(user.otherimage.darkImage)" src="{{user.otherimage.darkImage}}" alt="User Image" (error)="user.otherimage.darkImage=user.otherimage.darkImageErr">
+                        <img *ngIf="!theme" class="user-image" (click)="viewImg(user.otherimage.lightImage)" src="{{user.otherimage.lightImage}}" alt="User Image"(error)="user.otherimage.lightImage=user.otherimage.lightImageErr">
+                    <!-- <span class="online-{{user.online}} online_icon theme-{{theme}}"></span> -->
+                    </div>
+                    <div fxFlex="auto" class="profile-data" (click)="currentUser(user)">
+                        <h5 cl><span [class.white-text]="theme" class="user-contact-name">{{user.ScholarsName}}</span></h5>                      
+                        <h6><span class="user-contact-last-msg">{{user.UsersName  }}</span>
+                            <!-- <span class="last-login user-contact-last-login">&#x2022; {{user.lastLogin}}</span> -->
+                         </h6>               
+                    </div>
+                </div>
+            </div>
+        </cdk-virtual-scroll-viewport>
+    </div>
+    </div>

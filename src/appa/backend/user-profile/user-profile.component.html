@@ -1,0 +1,99 @@
+<div class="outer" *ngIf="!history">
+    <div class="sidenav-right">
+        <div class="cancel-half">
+            <div class="user-image-wrap">
+                <img *ngIf="theme" class="user-image" (click)="viewImg(profile?.image?.darkImage)" src="{{profile?.image?.darkImage}}" alt="">
+                <img *ngIf="!theme" class="user-image" (click)="viewImg(profile?.image?.lightImage)" src="{{profile?.image?.lightImage}}" alt="">
+                <span >
+                    <span class="{{profile.UserLoginStatus}} online_icon_large theme-large-{{theme}}"></span>
+                </span>
+
+            </div>
+            <h4 class="user-mame">{{profile.Name}}</h4>
+             <span >
+                <h6  class="status {{profile.UserLoginStatus}}-color">{{profile.UserLoginStatus}} &#x2022; {{profile.Duration}}</h6>
+            </span>
+                 <!--  <span *ngIf="profile.UserModel?.UserLoginStatus=='ONLINE'">
+                <span *ngIf="profile?.online">
+                    <h6  class="status user-online">Online &#x2022; {{profile?.lastLogin}}</h6>
+                </span>
+                <span *ngIf="!profile?.online">
+                    <h6  class="status user-away">Away &#x2022; {{profile?.lastLogin}}</h6>
+                </span>
+                
+            </span> -->
+        </div>
+        <div class="cancel-half  left-align">
+            <h6 class="label">Location</h6>
+            <h5 class="label-detail">{{profile.Location}}</h5><br>
+            <h6 class="label">Country</h6>
+            <h5 class="label-detail">{{profile.Nationality}}</h5><br>
+            <h6 class="label">Language</h6>
+            <h5 class="label-detail">{{profile.Language}}</h5><br>
+            <h6 *ngIf="role=='MODERATOR'" class="label">Email</h6> 
+            <h5  *ngIf="role=='MODERATOR'" class="label-detail">{{profile.UserName}}</h5>
+            <h6 class="label"*ngIf="profile.Gender=='Male'">His Side</h6>
+            <h6 class="label" *ngIf="profile.Gender=='Female'">Her Side</h6>
+            <h6 class="label" *ngIf="profile.Gender==''" >Other Side</h6>
+ 
+            <h5 *ngIf="profile.LocalTime" class="label-detail">{{profile.LocalTime | date:'shortTime'}}</h5>             
+            <h5 *ngIf="!profile.LocalTime" class="label-detail">any</h5><br>
+            <!-- <h6 *ngIf="role=='MODERATOR'" class="label">Email</h6> -->
+            <!-- <h5  *ngIf="role=='MODERATOR'" class="label-detail">{{profile.Email}}</h5> -->
+        </div>
+        <br>
+
+        <div class="position-middle">
+            <h6 class="label">Specialization</h6>
+            <p class="label-detail"> {{profile.SpecialisationIn}}</p>
+            <br>
+            <h6 class="label">Studied at</h6>
+            <p class="label-detail"> {{profile.StudiesAt}}</p>
+            <br>
+            <h6 class="label">About me</h6>
+            <p class="label-detail"> {{profile.Details}}</p>
+            <br>
+        </div>
+    </div>
+    <div class="position-bottom" >
+
+        <div class="subject-detail-wrap">
+
+            <div class="Apply" *ngIf="role!='ALIM'">
+                <!-- <button mat-raised-button color="warn" (click)="showHistory()"><span class="white-text">Message History</span></button> -->
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- ---------- -->
+<div class="outer" *ngIf="history">
+    <div class="sidenav-right">
+        <div class="position-middle" >       
+            <mat-nav-list *ngFor="let msgHis of conversations;index as i;">
+                <a mat-list-item>
+                    <div class="list cursor-pointer menu-{{theme}}" (click)="getConversation(msgHis)">
+                        <mat-icon class="float-right ">keyboard_arrow_right</mat-icon>
+                        <span class="menu-list menu-{{theme}}">{{msgHis.Subject}}</span>
+                       
+                        <p class="time"> {{msgHis.CreatedDate | date:'dd-MM-yyyy'}} |
+                            {{msgHis.CreatedDate | date:'shortTime'}}</p>
+
+                    </div>
+                </a>
+                <span class="menu-list menu-{{theme}}" *ngIf="!conversations"> No Data found</span>
+            </mat-nav-list>
+
+        </div>
+
+    </div>
+    <div class="position-bottom">
+
+        <div class="subject-detail-wrap">
+            <div class="Apply">
+                <button mat-raised-button color="warn" (click)="showProfile()"><span class="white-text">Profile</span></button>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,41 @@
+<div [class.theme-alternate]="theme">
+    <div class="main-container">
+        <mat-sidenav-container class="example-sidenav-container">
+            <div class="full-height" fxFlex="auto" fxLayout="column" fxLayout.sm="column" fxLayout.xs="column">
+                <div fxFlex="auto" fxLayoutAlign="space-around center">
+                    <div fxFlex="25%" fxFlex.md="35%" fxFlex.sm="45%" fxFlex.xs="80%">
+
+
+                        <form  >
+        
+                            <h6 class="text-center">
+                                <img fxHide="{{theme}}" class="profile-img-1"
+                                    src="assets/images/light/sent.svg">
+                                <img fxHide="{{!theme}}" class="profile-img-1"
+                                    src="assets/images/dark/sent.svg">
+
+                            </h6>
+                            <h1 class="mat-h1  text-center text-color-{{theme}}"><span class="title">Check your email!</span></h1> 
+                            <h3 class="mat-h3 text-center text-color-{{theme}}"><span class="sub-title">To confirm your email address,<br>
+                                the button in the email we sent to</span></h3>
+                            <!-- --------------------------------------- -->
+                            <br>
+                            <br>
+           
+
+                            <button mat-flat-button color="warn" class="login" (click)="goTologin()" ><span class="btn-text">GO TO LOGIN</span></button>
+                            <br>
+
+
+                            <br>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            <!-- ------------------------ -->
+
+        </mat-sidenav-container>
+    </div>
+</div>

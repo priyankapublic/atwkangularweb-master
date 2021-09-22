@@ -1,0 +1,30 @@
+<div class="outer">
+    <div class="sidenav-right" >
+
+
+        <div class="position-middle ">
+            <mat-nav-list>
+                <a mat-list-item (click)="updateProfile()">
+                 <span class="image-wrap"><img class="menu-item-img" src="/assets/images/common/user.svg"></span>    
+                    <span class="menu-list menu-{{theme}}">Update Profile</span> </a>
+                <a mat-list-item  (click)="changePasssword()">
+                    <span class="image-wrap"><img class="menu-item-img" src="assets/images/common/key.svg"></span>   
+                    <span class="menu-list menu-{{theme}}">Change Password</span></a>
+            </mat-nav-list>
+        
+        </div>
+        <div class="position-bottom">
+
+            <div class="toggle-wrap">
+                <h1 class="toggle-text">Dark Mode &nbsp;&nbsp;&nbsp;&nbsp;<span class="toggle-switch">
+                        <input (change)="getChangeTheme()" type="checkbox" id="chkTest" name="chkTest"
+                            [(ngModel)]="theme">
+                        <label for="chkTest">
+                            <span class="toggle-track"></span>
+                        </label>
+                    </span> &nbsp;&nbsp;&nbsp;&nbsp;  Light Mode</h1>
+            </div>
+        </div>
+    </div>
+
+</div>

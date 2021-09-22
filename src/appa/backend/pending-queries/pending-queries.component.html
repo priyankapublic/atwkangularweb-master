@@ -1,0 +1,146 @@
+<div class="outer border-right" >
+    <mat-toolbar color="{{color}}" class="example-toolbar1">
+        <mat-icon *ngIf="mobileQuery.matches" (click)="closeLeftSideNav()">arrow_back_ios</mat-icon>
+ 
+        <span class="example-fill-remaining-space">
+            <h4 class="menu-title">Approve/Reject</h4>
+        </span>
+
+        <span>
+
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu list item">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu list item="matMenu"> 
+                <button mat-menu-item (click)="logout()">
+                    <span>Logout &nbsp;&nbsp; <i class="fa fa-sign-out" aria-hidden="true"></i></span>
+                </button>
+            </mat-menu>
+        </span>
+    </mat-toolbar>
+   <div *ngIf="!!con">
+    <!-- ================================ -->
+    <div class="subject-detail-wrap" >
+        <div class="subject-detail-left">
+            <h5 class="subject-head">Subject</h5>
+            <h4 title="{{con?.Subject}}" class="subject-detail">{{con?.Subject}}</h4>
+        </div>
+        <div class="subject-detail-right">
+            <h5 class="subject-head">Ayatollah</h5>
+            <h4 title="{{con?.ayatollah}}" class="subject-detail">{{con?.ayatollah}}</h4>
+        </div>
+    </div>
+    <!-- ================================ -->
+     <div #scrollMe class="sidenav top-sidenav">
+            <div class="scroll-container">
+                <div class="subject-detail-wrap left-align" >
+                    <h5 class="subject-head left-align">Scholar</h5>
+                    <h4 title="{{con?.ToName}}" class="subject-detail left-align">{{con?.ToName}}</h4>
+                </div>
+            <div id="chat-wrap" class="chat-wrap">               
+
+              <!-- -------------------------- -->
+              <div class="right">
+                <div class="chat-{{theme}}">
+
+                    <div *ngIf="con?.IsVoice == 'Y';else notAudio">                           
+                            <div class="right-file">
+                                <audio class="audio" id="audio" controls="">
+                                    <source type="audio/mp3"
+                                        [src]="'https://app.askthosewhoknow.org/Download?identifier='+con?.Text">
+                                </audio>
+                                <br>{{con?.FileContextText}}
+                            </div>                  
+
+                    </div>
+                    <ng-template #notAudio>
+                        <div *ngIf="con?.ContentType;else Content">
+                            <div *ngIf="con?.ContentType.startsWith('image/');else notImage">
+           
+                              
+                                    <div class="right-file">
+                                        <a [href]="">
+                                            <img class="chat-image" (click)="viewImg('https://app.askthosewhoknow.org/Download?identifier='+con.Text)"
+                                                [src]="'https://app.askthosewhoknow.org/Download?identifier='+con?.Text">
+
+                                        </a>
+                                        <br>{{con?.FileContextText}}
+                                    </div>
+                       
+                            </div>
+                            <ng-template #notImage>
+                              
+                                    <div class="right-file">
+                                        <a [href]="'https://app.askthosewhoknow.org/Download?identifier='+con?.Text">
+                                            Doc
+                                            File <i class="fa fa-download" aria-hidden="true"></i></a>
+                                            <br>{{con?.FileContextText}}
+                                    </div>                               
+                            </ng-template>
+                        </div>
+                        <ng-template #Content>
+                            <span class="text-left" innerHTML="{{con?.Text}}"></span>
+                        </ng-template>
+                    </ng-template>
+
+                </div>
+                <p class="time">
+
+                   <span class="date"> {{con.CreatedDate | date:'dd-MM-yyyy'}} | {{con.CreatedDate | date:'shortTime'}}
+                    <span >
+                        <span *ngIf="con.IsRead=='Y';else notread ">
+                            <!-- <mat-icon class="readed">done_all</mat-icon> -->
+                            <img  src="assets/images/common/double_tick_blue.svg">
+                        </span>
+                        <ng-template #notread> 
+                            <span *ngIf="con.MessageStatus=='APPROVE';">
+                                <img  src="assets/images/common/double_tick_gray.svg">
+                                <!-- <mat-icon class="approved">done_all</mat-icon> -->
+                            </span>
+                            <span *ngIf="con.MessageStatus=='REJECT';">
+                                <mat-icon class="rejected">close</mat-icon>
+                            </span>
+                            <span *ngIf="con.MessageStatus=='PEND';">
+                                <mat-icon class="sended">done</mat-icon>
+                            </span>
+
+                        </ng-template>
+                    </span>
+                </span>
+                </p>
+            </div>
+
+              <!-- --------------------------- -->
+
+            </div>
+            <br>   
+        </div>
+            <p id="bottom-chat"></p>
+        </div>      
+          <!-- ===================== -->
+        <div class="input-wrap">
+               <div class="per100">
+                <button mat-raised-button color="warn" (click)="redirect()" >REDIRECT</button>
+               </div>
+
+        </div>
+   
+   </div>
+   <div *ngIf="!con">
+    <div class="scroll-container">
+        <h1 class="text-center"> 
+        <img fxHide="{{theme}}" class="large-logo" src="assets/images/light/splash_light.svg">
+        <img fxHide="{{!theme}}" class="large-logo" src="assets/images/dark/splash_light.svg">            
+         </h1>
+         <br>
+         <br>
+         <br>
+         <div class="store-wrap"> 
+            <img (click)="openStoreGoogle()"  class="google-play" src="assets/images/common/google_play.png">
+            <img (click)="openStoreIos()" class="ios-play" src="assets/images/common/ios_play.png">            
+         </div>
+    </div>
+   </div>
+</div>
+
+

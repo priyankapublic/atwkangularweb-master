@@ -1,0 +1,364 @@
+@import '../../../partial';
+.user-image-wrap {
+  width: 45px;
+  height: 45px;
+  position: relative;
+
+}
+.subject-detail-wrap{
+  padding: 10px;
+
+}
+.subject-detail {
+  text-align: center;
+  font-weight: 500;
+  margin: 0px;
+  font-size: 16px;
+  font-family: SF Text Light;
+}
+.subject-head {
+  text-align: center;
+  color: $gray;
+  font-size: 16px;
+ font-family: SF Text Regular;
+}
+.subject-detail-left{
+  width: 20%;
+  display: inline-block;
+}
+.subject-detail-right {
+  width: 80%;
+  display: inline-block;
+}
+img.user-image {
+  width: 40px;  height: 40px;
+  border-radius: 50%;
+  margin-top: 3px;
+}
+span.user-name {
+  font-size: 15px;
+  line-height: 1.2;
+}
+span.cur-date {
+  font-size: 12px;
+  color:$mat-warn-main;
+}
+.mt9{margin-top: 9px;}
+// --------------------
+.icon.icon-img.attachment-icon {
+  width: 28px;
+  padding: 0px 0px 0px 22px !important;
+}
+
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+  }  
+  
+  
+  h5,h6,p{
+  margin-top: 0px !important;
+  margin-bottom: 5px !important;
+  }
+  .user-list{
+    margin-bottom: 10px;
+  }
+  .profile-image {
+  position: relative;
+  height: 70px;
+  width: 70px;
+  }
+
+
+  h5{
+  white-space: nowrap;    
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  }
+  h6{
+  white-space: nowrap;    
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  }
+  .profile-data {
+  overflow: hidden !important;
+  width: 100px;
+  }
+  .input-wrap {
+    padding: 0px 13px;
+}
+  
+  .input-container {
+    width: 97%!important;
+    margin: 12px auto!important;
+}
+.inner-content {
+  margin: 0px 20px;
+}
+
+
+
+
+.chat-wrap{
+  padding: 0% 20px;
+  margin-bottom: 30px;
+}
+.question {
+  font-size: 18px;
+  font-family: SF Text Light;
+  border-radius: 18px;  
+  display: inline-block;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.answer {
+  font-size: 18px;
+  font-family: SF Text Light;
+  background-color: $dark-sky-blue ;
+  border-radius: 10px;
+  padding: 18px;
+  display: inline-block;
+  margin-bottom: 20px;
+  color: white;
+}
+
+span.subject-head.mr-sub {
+  margin-left: 10px;
+  margin-right: 30px;
+}
+span.subject-head.mr-det {
+  margin-left: 10px;
+  margin-right: 24px;
+}
+.detail-h5{
+  margin-bottom: 10px !important;
+}
+
+.subject-detail-wrap {
+ border-bottom:  1px solid #eee5d370 !important;
+  margin-bottom: 15px;
+}
+
+img.ios-play {
+  width: 150px;
+ float: right;
+ margin-right: 10px;
+  cursor: pointer;
+}
+
+img.google-play {
+  width: 150px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.scroll-container {
+  width: 100%;
+}
+
+.store-wrap {
+  max-width: 400px;
+  margin: auto;
+}
+
+.eye{
+  width: 20px;
+  margin-bottom: -5px;
+}
+
+img.fav-icon {
+  width: 28px;
+  height: 28px;
+  float: right;
+  cursor: pointer;
+}
+
+.wrap {
+  height: 100%;
+  max-width: 600px;
+  margin: auto;
+  border: 1px solid #eee5d370 !important;
+  box-sizing: border-box;
+}
+
+.sidenav { height: calc(100vh - 213px); }
+@media only screen and (max-width:  400px) {
+  .sidenav { height: calc(100vh - 255px); }
+}
+
+
+.switch-label, .switch-handle {
+	transition: All 0.3s ease;
+	-webkit-transition: All 0.3s ease;
+	-moz-transition: All 0.3s ease;
+	-o-transition: All 0.3s ease;
+}
+
+	 ::placeholder {
+		color:#A3ADB7;
+		opacity: 1; /* Firefox */
+	  }
+	  
+     :-ms-input-placeholder { /* Internet Explorer 10-11 */
+		color:#A3ADB7;
+	  }
+	  
+     ::-ms-input-placeholder { /* Microsoft Edge */
+		color:#A3ADB7;
+	  }
+
+
+	  
+	  .input-field{
+		  background-color: transparent;
+	  }
+	 .icon {
+		background-color: transparent;
+	 }
+	 .input-container {
+		border-radius: 100px;
+	}
+
+	
+.toggle-switch input[type=checkbox] {display:none}
+.toggle-switch label {cursor:pointer;}
+.toggle-switch label .toggle-track {
+ display: inline-block;
+ height:32px;
+ width:52px;
+ background:transparent;
+ border-radius:20px;
+ position:relative;
+ margin-bottom:4px;
+ border:1px solid #3A6CC1;
+}
+
+.toggle-switch .toggle-track:before{
+  content:'';
+  display:inline-block;
+  height:26px;
+  width:26px;
+  background:#3A6CC1;
+  margin:3px;
+  border-radius:20px;
+  position:absolute;
+  top:0;
+  right:0;
+  transition:right .2s ease-in;
+}
+
+.toggle-switch input[type="checkbox"]:checked + label .toggle-track:before{
+  right:20px;
+}
+.toggle-text{
+    font-size: 12px;
+    font-family:SF Text Medium;
+    text-align: center;
+}
+.btn-img-top{
+    margin-bottom: 10px;
+}
+.toggle-wrap {
+    padding: 10px 0px;
+    // margin-top: 13px;
+}
+
+
+
+.btn-ch{
+    width: 80%;  margin-bottom: 20px;
+    border-radius: 20px;   
+}
+.btn-text-ch{
+    font-size: 14 px;
+    font-family:SF Text Bold ;
+}
+.log-false{
+   color :$mat-warn-main !important;
+}
+.de-false{
+    color: $danger !important;   
+}
+.btn-logout{
+    border: 1.5px solid $mat-warn-main !important;
+}
+.btn-deactivate{
+    border: 1.5px solid $danger !important;   
+}
+
+.toggle-wrap {
+    position: fixed;
+    bottom: 0px;
+}
+
+// .toggle-wrap{
+//     position: fixed;
+
+//     right: 0;
+// }
+
+.toggle-wrap{
+    position: fixed;
+    bottom: 0px;
+    right: 10%;
+}
+
+
+
+.w33{
+  margin-top: 5px;
+  width: 33.33%;
+  display: inline-block;
+  text-align: center;
+}
+.google-play,.ios-play{
+  margin-top: 5px;
+}
+
+span.user-name{
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.home-image{
+  width: 25px;
+  height: 25px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+i.fa.fa-sign-in {
+  font-size: 18px;
+}
+i.fa.fa-home {
+  font-size: 40px;
+  cursor: pointer;
+}
+mat-icon.mat-icon.notranslate.white.material-icons.mat-icon-no-color {
+  color: white;
+  font-size: 17px;
+  margin: 0px 0px -7px -4px;
+}
+
+// button.mat-focus-indicator.not-mobile.mat-icon-button.mat-button-base.ng-star-inserted {
+//   display: block;
+// }
+button.mat-focus-indicator.mobile.mat-menu-item.ng-tns-c209-1 {
+  display: none;
+}
+
+@media only screen and (max-width:  400px) {
+  .toggle-switch {
+    display: none;
+}
+button.mat-focus-indicator.not-mobile.mat-icon-button.mat-button-base.ng-star-inserted {
+  display: none;
+}
+button.mat-focus-indicator.mobile.mat-menu-item.ng-tns-c209-1 {
+  display: block;
+}
+
+}
+.hide{display: none !important;}

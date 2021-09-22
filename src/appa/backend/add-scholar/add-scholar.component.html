@@ -1,0 +1,166 @@
+<div class="outer">
+    <div class="sidenav-right">
+
+        <form #profileForm="ngForm" class="form" (ngSubmit)="register(profileForm);profileForm.form.reset()">
+            <div *ngIf="!hideform">
+                <h6 class="text-center">
+                    <label for="file-input">
+                        <img class="profile-img" [src]="croppedImage">
+                        <input id="file-input" type="file" class="inputfile" (change)="onSelectChange($event)" />
+                    </label> <br>
+                </h6>
+                <h3 class="mat-h3 text-center text-color-{{theme}}"> Your Photo</h3>
+
+
+                <!-- <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                            [aspectRatio]="1 /1" [resizeToWidth]="300" [resizeToHeight]="300"
+                            (imageCropped)="imageCropped($event)"></image-cropper> -->
+
+                <!-- --------------------------------------- -->
+                <div class="tooltip" *ngIf="name?.touched && name?.errors?.required">
+                    <span class="tooltiptext">This field is required</span>
+                </div>
+                <div class="input-container">
+                    <img class=" icon icon-img" src="assets/images/common/user.svg">
+                    <input #name="ngModel" type="text" class="input-field {{theme}}" [(ngModel)]="frm.name" name="name"
+                        required placeholder="Name">
+                </div>
+                <!-- --------------------------------------- -->
+
+                <div class="tooltip" *ngIf="email?.touched && email?.errors?.required">
+                    <span class="tooltiptext">This field is required</span>
+                </div>
+                <div class="tooltip" *ngIf="email?.touched && email?.invalid && !email?.errors?.required">
+                    <span class="tooltiptext">Invalid Email</span>
+                </div>
+                <div class="input-container">
+                    <img class=" icon icon-img" src="assets/images/common/email.svg">
+                    <input #email="ngModel" type="email" class="input-field {{theme}}" [(ngModel)]="frm.email"
+                        name="email" email required placeholder="Email">
+                </div>
+
+                <!-- --------------------------------------- -->
+                <div class="tooltip" *ngIf="location1?.touched && location1?.errors?.required">
+                    <span class="tooltiptext">This field is required</span>
+                </div>
+
+                <div class="input-container">
+                    <img class=" icon icon-img" src="assets/images/common/location.svg">
+                    <select #location1="ngModel" type="text" class="input-field {{theme}}" name="nationality"
+                        [(ngModel)]="frm.nationality" placeholder="Email">
+                        <option class="text-placeholder" value="">Select Country</option>
+                        <option *ngFor="let country of countryList" [value]="country.code">{{country.name}}
+                        </option>
+                    </select>
+                </div>
+
+
+                <!-- --------------------------------------- -->
+                <div class="tooltip" *ngIf="location2?.touched && location2?.errors?.required">
+                    <span class="tooltiptext">This field is required</span>
+                </div>
+
+
+                <div class="input-container">
+                    <img class="icon icon-img" src="assets/images/common/location.svg">
+                    <input #location2="ngModel" type="text" class="input-field {{theme}}" [(ngModel)]="frm.location"
+                        name="location" required placeholder="location">
+                </div>
+                <!-- --------------------------------------- -->
+
+
+                <div class="tooltip" *ngIf="location?.touched && location?.errors?.required">
+                    <span class="tooltiptext">This field is required</span>
+                </div>
+
+                <div class="input-container">
+                    <img class=" icon icon-img" src="assets/images/common/language.svg">
+                    <input #location="ngModel" type="text" class="input-field {{theme}}" [(ngModel)]="frm.language"
+                        name="language" required placeholder="Language">
+                </div>
+                <!-- --------------------------------------- -->
+
+
+
+                <div class="tooltip" *ngIf="specialisationIn?.touched && specialisationIn?.errors?.required">
+                    <span class="tooltiptext">This field is required</span>
+                </div>
+
+                <div class="input-container">
+                    <img class=" icon icon-img" src="assets/images/common/cv.svg">
+                    <input #specialisationIn="ngModel" type="text" class="input-field {{theme}}" [(ngModel)]="frm.specialisationIn"
+                         name="specialisationIn" required placeholder="Specialisation In">
+                </div>
+
+
+
+                <div class="tooltip" *ngIf="studiesAt?.touched && studiesAt?.errors?.required">
+                    <span class="tooltiptext">This field is required</span>
+                </div>
+
+                <div class="input-container">
+                    <img class=" icon icon-img" src="assets/images/common/reading.svg">
+                    <input #studiesAt="ngModel" type="text" class="input-field {{theme}}" [(ngModel)]="frm.studiesAt"
+                         name="studiesAt" required placeholder="Studies At">
+                </div>
+                <!-- --------------------------------------- -->
+
+                <!-- --------------------------------------- -->
+                <div class="tooltip" *ngIf="password?.touched && password?.errors?.required">
+                    <span class="tooltiptext">This field is required</span>
+                </div>
+                <div class="input-container">
+                    <img class=" icon icon-img" src="assets/images/common/key.svg">
+                    <input (keyup)="chkPaassword(password.value,cpassword.value)" #password="ngModel" type="password"
+                        class="input-field {{theme}}" [(ngModel)]="frm.password" placeholder="Password" name="password"
+                        required>
+                </div>
+                <!-- --------------------------------------- -->
+                <div class="tooltip" *ngIf="cpassword?.touched && cpassword?.errors?.required">
+                    <span class="tooltiptext">This field is required</span>
+                </div>
+                <div class="tooltip" *ngIf="passError && !cpassword?.errors?.required ">
+                    <span class="tooltiptext">Password must be equal</span>
+                </div>
+
+
+                <div class="input-container mb-last-nput">
+                    <img class=" icon icon-img" src="assets/images/common/key.svg">
+                    <input (keyup)="chkPaassword(password.value,cpassword.value)" #cpassword="ngModel" type="password"
+                        class="input-field {{theme}}" [(ngModel)]="frm.cpassword" placeholder="Retype Password"
+                        name="cpassword" required>
+                </div>
+                <!-- --------------------------------------- -->
+
+
+                <button mat-flat-button color="warn" type="submit" [disabled]="!profileForm.valid  || passError"><span
+                        class="btn-text">SUBMIT</span></button>
+                <br>
+
+
+                <br>
+            </div>
+            <div *ngIf="hideform">
+                <div class="form-crop">
+                    <div class="crop-wrap">
+                        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                            [aspectRatio]="1 /1" [resizeToWidth]="300" [resizeToHeight]="300"
+                            (imageCropped)="imageCropped($event)"></image-cropper>
+                    </div>
+                </div>
+                <div class="subject-detail-wrap">
+                    <div class="cancel-half">
+                        <button mat-stroked-button color="warn" (click)="cancel()">Cancel</button>
+                    </div>
+                    <div class="cancel-half">
+                        <button mat-raised-button color="warn" type="submit" (click)="apply()">Apply</button>
+                    </div>
+                </div>
+
+
+            </div>
+        </form>
+
+    </div>
+</div>
+<!-- ------------------------ -->

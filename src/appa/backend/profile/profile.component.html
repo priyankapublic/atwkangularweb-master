@@ -1,0 +1,49 @@
+<div class="outer">
+    <div class="sidenav-right-prfile" >
+        <div class="cancel-half">
+            <div class="user-image-wrap">
+                <img *ngIf="theme" (click)="viewImg(profile?.image?.darkImage)" (click)="viewImg(profile?.image?.darkImage)" class="user-image" src="{{profile?.image?.darkImage}}" alt="" >
+                <img *ngIf="!theme" (click)="viewImg(profile?.image?.lightImage)" (click)="viewImg(profile?.image?.lightImage)" class="user-image" src="{{profile?.image?.lightImage}}" alt="">
+                <span class="online-true online_icon_large theme-large-{{theme}}"></span>
+            </div>
+            <h4 class="user-mame">{{profile.Name}}</h4>
+            <h6 class="user-online">Online</h6>
+        </div>
+        <div class="cancel-half  left-align">
+            <h6 class="label">Location</h6>
+            <h5 class="label-detail">{{profile.Location}}</h5><br>
+            <h6 class="label">Country</h6>
+            <h5 class="label-detail">{{profile.Nationality}}</h5><br>
+            <h6 class="label">Language</h6>
+            <h5 class="label-detail">{{profile?.Language}}</h5><br>
+            <h6 class="label">Email</h6>
+             <h5 class="label-detail">{{profile.UserName}}</h5> 
+        </div>
+        <br>
+
+        <div class="position-middle" *ngIf="profile.Details !='null';else orher">
+           {{profile.Details}}
+        </div>
+        <ng-template #orher>
+            <div class="position-middle" >
+          
+            </div>
+        </ng-template>
+    </div>
+    <div class="position-bottom position-bottom-{{theme}}">
+                <br>
+                <button (click)="logout()"  class="btn-ch btn-logout" mat-stroked-button><span class="btn-text-ch log-{{theme}}">SIGN OUT</span></button>
+               <button (click)="deactivateAccount()" class="btn-ch btn-deactivate" mat-stroked-button><span class="btn-text-ch de-{{theme}}">DEACTIVATE ACCOUNT</span></button>
+                
+            <div class="toggle-wrap">
+                <h1 class="toggle-text">Dark Mode  &nbsp;&nbsp;&nbsp;&nbsp;<span class="toggle-switch">
+                        <input (change)="getChangeTheme()" type="checkbox" id="chkTest" name="chkTest"
+                            [(ngModel)]="theme">
+                        <label for="chkTest">
+                            <span class="toggle-track"></span>
+                        </label>
+                    </span> &nbsp;&nbsp;&nbsp;&nbsp;Light Mode</h1>
+            </div>
+        </div>
+
+</div>

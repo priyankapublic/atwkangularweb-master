@@ -1,0 +1,20 @@
+
+@import '../../../partial';
+
+.mat-sidenav-container{
+    height: 100%;
+    background-color: transparent;
+}
+
+.dark-theme{
+    background-color: $mat-primary-main;
+}
+
+  .menu-sidenav{
+    min-width: 100%;   
+    background-color: transparent;
+}
+
+.mt12{
+    margin-top: 12px;
+}

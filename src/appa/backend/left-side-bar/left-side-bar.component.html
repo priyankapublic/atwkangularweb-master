@@ -1,0 +1,40 @@
+
+<mat-sidenav-container  class="mat-sidenav-container" >
+<mat-sidenav #drawer class="menu-sidenav" [class.dark-theme]="theme" mode="over" [opened]="showMenuVar"  disableClose >
+<app-left-menu-bar></app-left-menu-bar>
+    </mat-sidenav> 
+        <!-- ........................  CHAT MODE ..................................-->
+     <app-chat-contact-list *ngIf="tag=='app-user-dashboard'"></app-chat-contact-list>
+     <app-moderator-contact-list *ngIf="tag=='app-moderator-dashboard'" ></app-moderator-contact-list>
+         <!-- ........................  QA MODE ..................................-->
+     <app-qa-contact-list *ngIf="tag=='app-qna'"></app-qa-contact-list>
+        <!-- ........................  scholar Mode MODE ..................................-->
+     <app-scholars-contact-list *ngIf="tag=='app-scholars'"></app-scholars-contact-list>
+     <app-pending-contact-list *ngIf="tag=='app-pending-queries'"></app-pending-contact-list>
+
+     <app-chat-history-user-contact-list *ngIf="tag=='app-chat-history-user'"></app-chat-history-user-contact-list>
+
+ </mat-sidenav-container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

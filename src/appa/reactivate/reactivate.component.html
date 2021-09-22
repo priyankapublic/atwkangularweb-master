@@ -1,0 +1,101 @@
+<div [class.theme-alternate]="theme" *ngIf="show=='main'">
+    <div class="main-container">
+        <mat-sidenav-container class="example-sidenav-container">
+            <div class="full-height" fxFlex="auto" fxLayout="column" fxLayout.sm="column" fxLayout.xs="column">
+                <div fxFlex="auto" fxLayoutAlign="space-around center">
+                    <div fxFlex="25%" fxFlex.md="35%" fxFlex.sm="45%" fxFlex.xs="80%">
+
+
+                        <form #reacrivateForm="ngForm" class="form"
+                            (ngSubmit)="reacrivate(reacrivateForm);reacrivateForm.form.reset()">
+                            <h1 class="mat-h1  text-center text-color-{{theme}}"><span class="title">{{title}}</span></h1> 
+                            <h3 class="mat-h3 text-center text-color-{{theme}}"><span class="sub-title">Enter your Email below <br>and push a
+                                submit</span></h3>
+                            <h6 class="text-center">
+                                <img fxHide="{{theme}}" class="profile-img-1"
+                                    src="assets/images/light/forgot_password.svg">
+                                <img fxHide="{{!theme}}" class="profile-img-1"
+                                    src="assets/images/dark/forgot_password.svg">
+
+                            </h6>
+                            <h3 class="mat-h3 text-center text-color-{{theme}}"><span class="sub-title">After that, you get an email<br> with
+                                account reactivation access</span></h3>
+                            <!-- --------------------------------------- -->
+                            <br>
+                            <br>
+                            <div class="tooltip" *ngIf="email?.touched && email?.errors?.required">
+                                <span class="tooltiptext">This field is required</span>
+                            </div>
+                            <div class="tooltip" *ngIf="email?.touched && email?.invalid && !email?.errors?.required">
+                                <span class="tooltiptext">Invalid Email</span>
+                            </div>
+                            <div class="input-container mb-last-nput">
+                                <img class=" icon icon-img" src="assets/images/common/email.svg">
+                                <input #email="ngModel" type="email" class="input-field {{theme}}" ngModel name="email" email
+                                    required placeholder="Email">
+                            </div>
+
+                            <!-- --------------------------------------- -->
+
+
+                            <button mat-flat-button color="warn" type="submit" [disabled]="!reacrivateForm.valid"><span
+                                    class="btn-text">SUBMIT</span></button>
+                            <br>
+
+
+                            <br>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            <!-- ------------------------ -->
+
+        </mat-sidenav-container>
+    </div>
+</div>
+
+
+
+<div [class.theme-alternate]="theme" *ngIf="show=='popup'">
+    <div class="main-container">
+        <mat-sidenav-container class="example-sidenav-container">
+            <div class="full-height" fxFlex="auto" fxLayout="column" fxLayout.sm="column" fxLayout.xs="column">
+                <div fxFlex="auto" fxLayoutAlign="space-around center">
+                    <div fxFlex="25%" fxFlex.md="35%" fxFlex.sm="45%" fxFlex.xs="80%">
+
+
+                        <form  >
+        
+                            <h6 class="text-center">
+                                <img fxHide="{{theme}}" class="profile-img-1"
+                                    src="assets/images/light/sent.svg">
+                                <img fxHide="{{!theme}}" class="profile-img-1"
+                                    src="assets/images/dark/sent.svg">
+
+                            </h6>
+                            <h1 class="mat-h1  text-center text-color-{{theme}}"><span class="title-p">Check your email!</span></h1> 
+                            <h3 class="mat-h3 text-center text-color-{{theme}}"><span class="sub-title">To confirm your email address,<br>
+                            the button in the email we sent to <br><span class="sub-title-email">{{yourEmail}}</span></span></h3>
+                            <!-- --------------------------------------- -->
+                            <br>
+                            <br>
+           
+
+                            <button mat-flat-button color="warn" class="login" (click)="goTologin()" ><span class="btn-text">HOME</span></button>
+                            <br>
+
+
+                            <br>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            <!-- ------------------------ -->
+
+        </mat-sidenav-container>
+    </div>
+</div>

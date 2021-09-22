@@ -1,0 +1,115 @@
+<div  class="outer abslute-wrap" (click)="closeMenuBar()">
+    <div class="inner-wrap-{{theme}} " >
+    <a mat-list-item class="list-top" (click)="profile()">
+     <div  class="user-img-wrap">
+     <img *ngIf="theme" class="user-image" src="{{user?.image.darkImage}}" alt="" (error)="user?.image.darkImage=user?.image.darkImageErr">
+        <img *ngIf="!theme" class="user-image" src="{{user?.image.lightImage}}" alt="" (error)="user?.image.lightImage=user?.image.lightImageErr">
+    </div> 
+        <p class="label"> <span class="user-name-wrap name-{{theme}}"> &nbsp;&nbsp;&nbsp;&nbsp;{{user?.name | slice:0:15}}<span *ngIf="user?.name.length >15">...</span></span>
+            <mat-icon class="float-right name-{{theme}}">keyboard_arrow_right</mat-icon>
+        </p>
+    </a>
+    <div class="logo-wrap">
+        <img *ngIf="!theme" class="logo main-logo" src="assets/images/light/menu-logo.png">
+        <img *ngIf="theme" class="logo main-logo" src="assets/images/dark/menu-logo.png">
+    </div>
+    <div class="wrap-menu">
+        <a mat-list-item [class.menu-active]="dataArray?.title=='Dashboard'" class="list" (click)="home()">
+            <img *ngIf="!theme && dataArray?.title!='Dashboard'" class="logo scolar" src="assets/images/light/home_icon.svg">
+            <img *ngIf="theme && dataArray?.title!='Dashboard'" class="logo scolar" src="assets/images/dark/home_icon.svg">
+            <img *ngIf="dataArray?.title=='Dashboard'" class="logo scolar" src="assets/images/common/home_icon.svg">
+            <p class="label"> <span class="menu-name name-{{theme}}"> &nbsp;Home </span></p>
+        </a>
+        <a *ngIf="role=='MODERATOR'" mat-list-item [class.menu-active]="dataArray?.tag=='app-pending-queries'" class="list" (click)="pendingQueries()">
+            <img *ngIf="!theme && dataArray?.tag!='app-pending-queries'" class="logo scolar" src="assets/images/light/discuss_issue.svg">
+            <img *ngIf="theme && dataArray?.tag!='app-pending-queries'" class="logo scolar" src="assets/images/dark/discuss_issue.svg">
+            <img *ngIf="dataArray?.tag=='app-pending-queries'" class="logo scolar" src="assets/images/common/discuss_issue.svg">
+            <p class="label"> <span class="menu-name name-{{theme}}"> &nbsp;Pending Queries</span></p>
+        </a>
+
+
+        <a *ngIf="role=='MODERATOR'" mat-list-item class="list" [class.menu-active]="dataArray?.title=='Users'" (click)="users()">            
+            <img *ngIf="!theme && dataArray?.title!='Users'" class="logo scolar" src="assets/images/light/user_menu.svg">
+            <img *ngIf="theme && dataArray?.title!='Users'" class="logo scolar" src="assets/images/dark/user_menu.svg">
+            <img *ngIf="dataArray?.title=='Users'" class="logo scolar" src="assets/images/common/user_menu.svg">
+            <p class="label"> <span class="menu-name name-{{theme}}"> &nbsp;Users </span></p>
+        </a>
+        <a  mat-list-item class="list" [class.menu-active]="dataArray?.title=='Scholars'" (click)="scholar()">            
+            <img *ngIf="!theme && dataArray?.title!='Scholars'" class="logo scolar" src="assets/images/light/scholer_icon.svg">
+            <img *ngIf="theme && dataArray?.title!='Scholars'" class="logo scolar" src="assets/images/dark/scholer_icon.svg">
+            <img *ngIf="dataArray?.title=='Scholars'" class="logo scolar" src="assets/images/common/scholer_icon.svg">
+            <p class="label"> <span class="menu-name name-{{theme}}"> &nbsp;Scholar </span></p>
+        </a>
+        <a *ngIf="role=='MODERATOR'" mat-list-item class="list" [class.menu-active]="dataArray?.title=='Add Scholar'" (click)="addScholer()">            
+            <img *ngIf="!theme && dataArray?.title!='Add Scholar'" class="logo scolar" src="assets/images/light/scholer_icon.svg">
+            <img *ngIf="theme && dataArray?.title!='Add Scholar'" class="logo scolar" src="assets/images/dark/scholer_icon.svg">
+            <img *ngIf="dataArray?.title=='Add Scholar'" class="logo scolar" src="assets/images/common/scholer_icon.svg">
+            <p class="label"> <span class="menu-name name-{{theme}}"> &nbsp;Add Scholar</span></p>
+        </a> 
+        <a mat-list-item class="list" [class.menu-active]="dataArray?.tag=='app-qna'" (click)="publicqna()">
+            <img *ngIf="!theme && dataArray?.tag!='app-qna'" class="logo scolar" src="assets/images/light/qna_icon.svg">
+            <img *ngIf="theme && dataArray?.tag!='app-qna'" class="logo scolar" src="assets/images/dark/qna_icon.svg">
+            <img *ngIf="dataArray?.tag=='app-qna'" class="logo scolar" src="assets/images/common/qna_icon.svg">
+            <p class="label"> <span class="menu-name name-{{theme}}"> &nbsp;Public QNA </span></p>
+        </a>
+
+        <a *ngIf="role=='MODERATOR'" mat-list-item class="list" [class.menu-active]="dataArray?.tag=='app-bulk-messages'" (click)="bulkMessages()">
+            <img *ngIf="!theme && dataArray?.tag!='app-bulk-messages'" class="logo " src="assets/images/light/feedback_icon.svg">
+            <img *ngIf="theme && dataArray?.tag!='app-bulk-messages'" class="logo "  src="assets/images/dark/feedback_icon.svg">
+            <img *ngIf="dataArray?.tag=='app-bulk-messages'" class="logo " src="assets/images/common/feedback_icon.svg">
+            <p class="label"> <span class="menu-name name-{{theme}}"> Bulk Message </span></p>
+        </a>
+        <!-- <p class="line"></p>
+                   <a mat-list-item  class="list" (click)="home()">
+                    <img *ngIf="!theme" class="logo" src="assets/images/light/atwk_web_icon.svg">
+                    <img *ngIf="theme" class="logo" src="assets/images/dark/atwk_web_icon.svg">                            
+                    <p class="label"> <span class="menu-name name-{{theme}}"> ATWKWeb </span></p> 
+                   </a>
+                   <p class="line"></p> -->
+
+
+        <a mat-list-item class="list" [class.menu-active]="dataArray?.tag=='app-about'" (click)="about()">
+            <img *ngIf="!theme && dataArray?.tag!='app-about'" class="logo" src="assets/images/light/info_icon.svg">
+            <img *ngIf="theme && dataArray?.tag!='app-about'" class="logo" src="assets/images/dark/info_icon.svg">
+            <img *ngIf="dataArray?.tag=='app-about'" class="logo" src="assets/images/common/info_icon.svg">
+            <p class="label"> <span class="menu-name name-{{theme}}"> About </span></p>
+        </a>
+        <a mat-list-item class="list" [class.menu-active]="dataArray?.tag=='app-how-to-use'" (click)="howToUse()">
+            <img *ngIf="!theme && dataArray?.tag!='app-how-to-use'" class="logo" src="assets/images/light/how_to_use_icon.svg">
+            <img *ngIf="theme && dataArray?.tag!='app-how-to-use'" class="logo" src="assets/images/dark/how_to_use_icon.svg">
+            <img *ngIf="dataArray?.tag=='app-how-to-use'" class="logo" src="assets/images/common/how_to_use_icon.svg">    
+            <p class="label"> <span class="menu-name name-{{theme}}"> How to use </span></p>
+        </a>
+        <a mat-list-item class="list" [class.menu-active]="dataArray?.tag=='app-donate-now'" (click)="donateNow()">
+            <img *ngIf="!theme && dataArray?.tag!='app-donate-now'" class="logo" src="assets/images/light/donate_icon.svg">
+            <img *ngIf="theme && dataArray?.tag!='app-donate-now'" class="logo" src="assets/images/dark/donate_icon.svg">
+            <img *ngIf="dataArray?.tag=='app-donate-now'" class="logo" src="assets/images/common/donate_icon.svg">    
+            <p class="label"> <span class="menu-name name-{{theme}}"> Donate now </span></p>
+        </a>
+        <a mat-list-item class="list" [class.menu-active]="dataArray?.tag=='app-terms-of-usage'" (click)="termOfUsage()">
+            <img *ngIf="!theme && dataArray?.tag!='app-terms-of-usage'" class="logo" src="assets/images/light/term_icon.svg">
+            <img *ngIf="theme && dataArray?.tag!='app-terms-of-usage'" class="logo" src="assets/images/dark/term_icon.svg">
+            <img *ngIf="dataArray?.tag=='app-terms-of-usage'" class="logo" src="assets/images/common/term_icon.svg">   
+            <p class="label"> <span class="menu-name name-{{theme}}"> Terms of Usage </span></p>
+        </a>
+        <a mat-list-item class="list" [class.menu-active]="dataArray?.tag=='app-feedback'" (click)="feedback()">
+            <img *ngIf="!theme && dataArray?.tag!='app-feedback'" class="logo" src="assets/images/light/feedback_icon.svg">
+            <img *ngIf="theme && dataArray?.tag!='app-feedback'" class="logo" src="assets/images/dark/feedback_icon.svg">
+            <img *ngIf="dataArray?.tag=='app-feedback'" class="logo" src="assets/images/common/feedback_icon.svg">    
+            <p class="label"> <span class="menu-name name-{{theme}}"> Feedback </span></p>
+        </a>
+        <a mat-list-item class="list" [class.menu-active]="dataArray?.tag=='app-notifications'" (click)="notification()">
+            <img *ngIf="!theme && dataArray?.tag!='app-notifications'" class="logo" src="assets/images/light/notification_icon.svg">
+            <img *ngIf="theme && dataArray?.tag!='app-notifications'" class="logo" src="assets/images/dark/notification_icon.svg">
+            <img *ngIf="dataArray?.tag=='app-notifications'" class="logo" src="assets/images/common/notification_icon.svg">    
+            <p class="label"> <span class="menu-name name-{{theme}}"> Notifications </span> <span class="bladge-count-right"> {{msgCount}}</span></p>
+        </a>
+        <a mat-list-item class="list" [class.menu-active]="dataArray?.tag=='app-setting'" (click)="setting()">
+            <img *ngIf="!theme && dataArray?.tag!='app-setting'" class="logo ml6" src="assets/images/light/setting.svg">
+            <img *ngIf="theme && dataArray?.tag!='app-setting'" class="logo ml6" src="assets/images/dark/setting.svg">
+            <img *ngIf="dataArray?.tag=='app-setting'" class="logo ml6" src="assets/images/common/setting.svg">    
+            <p class="label"> <span class="menu-name name-{{theme}}"> &nbsp;Setings </span></p>
+        </a>
+    </div>
+</div>
+</div>

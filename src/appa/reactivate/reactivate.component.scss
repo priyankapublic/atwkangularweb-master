@@ -1,0 +1,160 @@
+@import '../../partial';
+.full-height {
+    height: 100%;
+    // background-color:$mat-accent-darker;
+  }
+  .register{
+      color: red;
+      float: right;
+      cursor: pointer;
+  }
+  h6.text-center {
+    margin-bottom: 8px;
+}
+  #file-input{display: none;}
+
+  img.profile-img {
+    border-radius: 50%;
+	width: 150px;
+	border: 1px solid $dark-sky-blue ;
+    background-color: $dark-sky-blue ;
+}
+
+img.logo {
+    width: 70%;
+}
+
+mat-hint{
+  color:$mat-warn-main!important;
+}
+
+span.mat-button-wrapper {
+  color: $mat-warn-main!important;
+}
+simple-snack-bar span {
+  color:$mat-warn-main!important;
+}
+.wrap{
+  height: 80%;
+}
+mat-card.mat-card {
+  padding: 50px;
+  
+}
+
+.register{
+  color:$mat-warn-main!important;
+  float: right;
+  cursor: pointer;
+}
+.form-group{
+  width: 100%;
+  
+}
+.form{  
+  margin: 0px auto;
+}
+button.mat-flat-button.mat-button-base {
+  width: 100%;
+  margin: 0px !important;
+  border-radius: 100px !important;
+}
+
+.prefix{
+  margin-right: 15px;
+}
+hr{
+ height: 3px;
+  background-color:  $mat-warn-main; 
+}
+.or {
+  color:  $mat-warn-main; 
+}
+.wrap-text {
+  margin: 10px 30px;
+}
+
+.forgot{
+  float: right;
+  cursor: pointer;
+}
+.sky-blue-text{
+  color: $dark-sky-blue ;
+}
+.mat-h4{
+  cursor: pointer;
+}
+
+
+
+	// ======================= tool tip
+
+	.tooltip {
+		position: absolute;
+		display: inline-block;
+		border-bottom: 1px dotted black;
+	  }
+	  
+	  .tooltip .tooltiptext {
+
+		width: 180px;
+		background-color: black;
+		color: #fff;
+		text-align: center;
+		border-radius: 6px;
+		padding: 5px 0;
+		position: absolute;
+		z-index: 1;
+		bottom: 150%;
+		left: 50%;
+		margin-left: 160px;
+	  }
+	  
+	  .tooltip .tooltiptext::after {
+		content: "";
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		margin-left: -5px;
+		border-width: 5px;
+		border-style: solid;
+		border-color: black transparent transparent transparent;
+    }
+    
+    ::placeholder {
+      color:#A3ADB7;
+      opacity: 1; /* Firefox */
+      }
+      
+       :-ms-input-placeholder { /* Internet Explorer 10-11 */
+      color:#A3ADB7;
+      }
+      
+       ::-ms-input-placeholder { /* Microsoft Edge */
+      color:#A3ADB7;
+      }
+
+
+      	  
+	  .input-field{
+		  background-color: transparent;
+	  }
+	 .icon {
+		background-color: transparent;
+	 }
+	 .input-container {
+
+		border-radius: 100px;
+  }
+  
+
+
+  
+  .title-p{  
+    font-size: 20px;
+    font-family: SF Text Medium;
+}
+.sub-title-email {
+font-size: 16px;
+font-family: SF Text medium;
+}

@@ -1,0 +1,87 @@
+<div [class.theme-alternate]="theme">
+    <div class="main-container bg-img-{{theme}}" [class.example-is-mobile]="mobileQuery.matches">
+        <mat-sidenav-container class="example-sidenav-container">
+            <mat-sidenav class="left-side-nav" #snav [opened]="openedLeft" [mode]="mobileQuery.matches ? 'over' : 'side'" >
+                <mat-toolbar color="{{color}}" class="example-toolbar">      
+                    <img (click)="showMenu()" *ngIf="!theme" class="curser-pointer menu-logo" src="assets/images/light/menu_icon.svg" >
+                    <img (click)="showMenu()" *ngIf="theme" class="curser-pointer menu-logo" src="assets/images/dark/menu_icon.svg" >         
+                    <!-- <mat-icon class="cursor-pointer" (click)="showMenu()">format_list_bulleted</mat-icon> -->
+                    <span class="example-fill-remaining-space" fxLayoutAlign="space-around center">
+                        <!-- =============== add menu list item items here ================ -->
+                        <span *ngIf="!theme && !hidemenu" >
+                            <div class="img-btn-wrap"> 
+                            <span *ngIf="msgCount>0 && chatOn" class="count-bladge"><span class="inner-bladge">{{msgCount}}</span></span>
+                            <img (click)="publicqna()"  *ngIf="chatOn" class="menu-chat curser-pointer" src="assets/images/light/chat-on.svg" usemap="#chatmap">
+                            <img (click)="home()"  *ngIf="!chatOn" class="menu-chat curser-pointer" src="assets/images/light/chat-off.svg" usemap="#qamap">
+                         </div>
+                        </span>
+                        <span *ngIf="theme && !hidemenu" class="img-btn-wrap">
+                            <div class="img-btn-wrap">
+                                <span *ngIf="msgCount>0 && chatOn" class="count-bladge"><span class="inner-bladge">{{msgCount}}</span></span>
+                            <img (click)="publicqna()"  *ngIf="chatOn" class="menu-chat curser-pointer" src="assets/images/dark/chat-on.svg" usemap="#chatmap">
+                            <img (click)="home()" *ngIf="!chatOn" class="menu-chat curser-pointer" src="assets/images/dark/chat-off.svg" usemap="#qamap">
+                        </div>
+                        </span>
+                        <map class="hide" name="qamap"><area shape="rect" coords="80,0,152,28" ></map>
+                        <map class="hide" name="chatmap"><area shape="rect" coords="0,0,79,28" ></map>
+                        <h4 class="menu-title" *ngIf="hidemenu">{{selectedUserType.name}}</h4>
+                        <!-- =============== add menu list item items here ================ -->
+                    </span>
+                    <span class="tune-wrap" *ngIf="chatOn && !hidemenu && role=='USER'" (click)="startNewChat()">  
+                        <img  *ngIf="!theme" class="curser-pointer" src="assets/images/light/start_chat.svg" >
+                        <img  *ngIf="theme" class="curser-pointer" src="assets/images/dark/start_chat.svg" > &nbsp;
+                    </span>
+                    <span class="tune-wrap" *ngIf="!hidemenu && role!='MODERATOR' || (role=='MODERATOR' && tag=='app-qna')" (click)="showFilterTagOfQna()">  
+                        <img  *ngIf="!theme" class="curser-pointer" src="assets/images/light/tune_icon.svg" >
+                        <img  *ngIf="theme" class="curser-pointer" src="assets/images/dark/tune_icon.svg" >
+                    </span>
+
+                </mat-toolbar>
+                <mat-nav-list [style.marginTop.px]="mobileQuery.matches ? 56 : 0" style="height: calc(100% - 56px)">
+                    <app-left-side-bar ></app-left-side-bar>                    
+                </mat-nav-list>
+            </mat-sidenav>
+            <mat-sidenav-content >
+                <!-- .......................... -->
+                <router-outlet></router-outlet>
+                <!-- .......................... -->
+            </mat-sidenav-content>
+            <!-- ==============  -->
+            <mat-sidenav class="left-side-nav" position="end" #rightsnav [opened]="openedRight" [mode]="mobileQuery.matches ? 'over' : 'side'" >
+
+                <mat-toolbar color="{{color}}" class="example-toolbar">
+                    <mat-icon *ngIf="!mobileQuery.matches" (click)="rightsnavClose(!mobileQuery.matches)">close</mat-icon>
+                    <mat-icon *ngIf="mobileQuery.matches" (click)="rightsnavCloseMobile(mobileQuery.matches)">arrow_back_ios</mat-icon>                    
+                    <!-- <span class="mat-h2"> right pan</span> -->
+                    <span class="example-fill-remaining-space">
+                        <!-- =============== add menu list item items here ================ -->
+                    <h4 class="menu-title">{{rightPanTitle}}</h4>
+                        <!-- =============== add menu list item items here ================ -->
+                    </span>
+                    <span>
+                        <!-- Light  <mat-slide-toggle (change)="changeTheme()"
+                                    class="example-margin"
+                                    [color]="color" [(ngModel)]="theme">    Dark    
+                                </mat-slide-toggle> -->
+                      <button (click)="updateProfile()" mat-icon-button *ngIf="tag=='app-profile'">          
+                            <mat-icon>create</mat-icon>
+                        </button> 
+                        <!-- <mat-menu #menu list item="matMenu">
+                            <button mat-menu-item (click)="logout()">
+                                        <mat-icon>arrow_right_alt</mat-icon>
+                                        <span>Logout</span>
+                                    </button>
+                        </mat-menu> -->
+                    </span>
+                </mat-toolbar>
+                <mat-nav-list [style.marginTop.px]="mobileQuery.matches ? 56 : 0"  style="height: calc(100% - 56px)">
+                    <app-right-side-bar ></app-right-side-bar>
+                </mat-nav-list>
+            </mat-sidenav>
+            <!-- <mat-sidenav-content>
+
+            </mat-sidenav-content> -->
+        </mat-sidenav-container>
+    </div>
+</div>
+<ngx-spinner></ngx-spinner>

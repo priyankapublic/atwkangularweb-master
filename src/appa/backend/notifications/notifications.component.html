@@ -1,0 +1,12 @@
+<div class="outer">
+    
+    <div class="sidenav-right">
+    <div class="notification" *ngFor="let not of allNotification">
+        <div class="message">
+        {{not?.Text}}
+        </div>    
+        <span class="cur-date date-{{theme}}">{{not?.CreatedDate | date:'dd-MM-yyyy'}} | {{not?.CreatedDate | date:'shortTime'}}</span>
+
+    </div>
+    </div>
+    </div>

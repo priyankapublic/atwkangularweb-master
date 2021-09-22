@@ -1,0 +1,50 @@
+
+@import '../../partial';
+.menu-logo[style]{
+  z-index: 1000!important;
+}
+mat-sidenav { 
+   width: 33.33%;
+   min-width: 320px;
+   }
+@media only screen and (max-width: 600px) {
+  mat-sidenav {  width: 100%; }
+}
+img.user-image {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+.mat-list-base {
+padding-top: 0px !important;
+
+}
+img.menu-chat{
+  /* margin: 10%; */
+  vertical-align: middle;
+}
+.hide{display: none}
+
+.tune {
+  -webkit-transform:  rotate(90deg);
+  -moz-transform:  rotate(90deg);
+  -ms-transform:  rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+tune-gold{
+  color: $mat-warn-main !important;
+}
+span.tune-wrap.ng-star-inserted {
+  margin-top: 6px;
+}
+
+@media all and (min--moz-device-pixel-ratio:0) {
+@media only screen and (min-width: 1025px) {
+  mat-sidenav-content{
+    margin-left: 417px !important;
+  }
+}
+}
+
