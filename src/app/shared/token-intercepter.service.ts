@@ -10,9 +10,10 @@ import { tap } from 'rxjs/operators';
 export class TokenIntercepterService implements HttpInterceptor {
   authToken
   constructor(private router: Router) {
-    this.authToken = localStorage.getItem('interceptor').substring(12);
    }
   intercept(req, next) {
+    this.authToken = localStorage.getItem('interceptor').substring(12);
+
     let tokenreq = req.clone({
       setHeaders:
         { Authorization: `Basic ${this.authToken}` }
@@ -23,7 +24,7 @@ export class TokenIntercepterService implements HttpInterceptor {
         if (err instanceof HttpErrorResponse) {
           if (err.status !== 401) {
             return;
-          }else{  
+          }else{
           localStorage.removeItem('userDetail');
           localStorage.removeItem('username');
           localStorage.removeItem('interceptor');
@@ -32,8 +33,8 @@ export class TokenIntercepterService implements HttpInterceptor {
           localStorage.removeItem('menuOpened');
           setTimeout(() => {
           if(localStorage.getItem('reload')){
-            if(localStorage.getItem('reload')=="true"){        
-               location.replace('/login');             
+            if(localStorage.getItem('reload')=="true"){
+               location.replace('/login');
             }
           }
         }, 1000);
