@@ -61,16 +61,15 @@ span.cur-date {
   .top-sidenav{  height: calc(100vh - 208px);}
   .bottom-sidenav{  height: calc(100vh - 208px);}
   }
-  
+
   .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
     display: block;
-  }  
-  
-  
+  }
+
   h5,h6,p{
   margin-top: 0px !important;
   margin-bottom: 5px !important;
@@ -83,21 +82,21 @@ span.cur-date {
   height: 70px;
   width: 70px;
   }
-  
+
   h5{
-  white-space: nowrap;    
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
   }
   h6{
-  white-space: nowrap;    
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
   }
   .profile-data {
   overflow: hidden !important;
   width: 100px;
-  } 
+  }
 
 .inner-content {
   margin: 0px 20px;
@@ -160,7 +159,7 @@ div.right div.chat-true{
   border-top-right-radius:25px ;
   border-bottom-left-radius:25px ;
   background-color: $dark-sky-blue ;
-  margin: 10px;  
+  margin: 10px;
   color:white;
   text-align: right;
   display: inline-block!important;
@@ -195,7 +194,7 @@ div.right p.time {
 .time {
   font-size: 14px;
   color:$gray;
-  font-family: SF Text  Regular; 
+  font-family: SF Text  Regular;
 }
 div.left-file a,div.right-file a {
   font-size: 15px !important;
@@ -217,14 +216,14 @@ span.delete-msg{
   .chat-image {
     max-width: 250px;
     height: auto;
-   
+
 }
 
 .user-contact-name{
   width: 600px;
-  white-space: nowrap;    
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
 }
 .rejected{
   color: $danger;
@@ -245,7 +244,7 @@ span.delete-msg{
 }
 .chat-true,.chat-false{
   font-size: 18px;
-  font-family: SF Text  Regular; 
+  font-family: SF Text  Regular;
 
 }
 .mat-checkbox:parent { display: inline-block }
@@ -311,7 +310,7 @@ button.warn-menu.mat-menu-item:hover{
   text-align: center;
   border: none !important;
   width: 28px;
-  padding-left: 21px;  
+  padding-left: 21px;
 }
 .icon-right {
   text-align: center;
@@ -353,12 +352,6 @@ img.pull-push{
 .pull-push-ch {
   // top: -117px !important;
 }
-
-
-
-
-
-
 
 .cdk-overlay-connected-position-bounding-box[style]{
   height: 100vh !important;
@@ -421,7 +414,7 @@ input.input-field {
 }
 .last-login{
   float: right;
-}  
+}
 .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
@@ -442,14 +435,14 @@ h5,h6,p{
 
 
 h5{
-  white-space: nowrap;    
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
 }
 h6{
-  white-space: nowrap;    
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
   margin-bottom: 0px !important;
 }
 .profile-data {
@@ -470,7 +463,11 @@ h6{
 .user-list {
   margin: 5px auto;
   width: 90%;
-  padding-bottom: 20px;
+  padding: 10px;
+  &:hover,
+  &.selected{
+    background-color: #c7a76d;
+  }
 }
 .profile-image {
   margin-right: 12px;
@@ -538,7 +535,7 @@ input.false::-ms-input-placeholder { /* Microsoft Edge */
   margin: 0px auto;
   margin-top: 10px !important;
 }
-.input-field-bottom{  
+.input-field-bottom{
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   margin: 0px auto;
@@ -567,7 +564,7 @@ p.line {
 }
 
 .bottom-action-wrap{
-  text-align: center; 
+  text-align: center;
   height: 48px;
 }
 .half{
@@ -604,21 +601,21 @@ button.mat-stroked-button.mat-button-base.mat-warn{
     transition: .2s;
     cursor:pointer;
     color: #363945;
-  
+
     &:checked {
       background: #3A6CC1;
       box-shadow:
       inset 0 0 0 .4em #001f52,
       0 0 0 .2em;
     }
-    
+
     &:checked {
       background: #3A6CC1;
       box-shadow:
         inset 0 0 0 .4em #001f52,
         0 0 0 .2em #3A6CC1;
-    } 
-  
+    }
+
     &:focus { outline: 0; }
   }
 
@@ -636,24 +633,24 @@ button.mat-stroked-button.mat-button-base.mat-warn{
     transition: .2s;
     cursor:pointer;
     color: #363945;
-  
+
     &:checked {
       background: #3A6CC1;
       box-shadow:
       inset 0 0 0 .4em white,
       0 0 0 .2em;
     }
-    
+
     &:checked {
       background: #3A6CC1;
       box-shadow:
         inset 0 0 0 .4em white,
         0 0 0 .2em #3A6CC1;
-    } 
-  
+    }
+
     &:focus { outline: 0; }
   }
-  
+
   button.mat-raised-button.mat-button-base.mat-warn:disabled {
     background-color: #c7a76d !important;
     cursor: not-allowed !important;
@@ -678,7 +675,7 @@ img.google-play {
   cursor: pointer;
 }
 .scroll-container {
-  width: 100%; 
+  width: 100%;
   margin: 10% auto;
 }
 

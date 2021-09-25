@@ -44,8 +44,9 @@ export class ScholarRedirectComponent implements OnInit {
   chatMode:Boolean = true;
   redirectDetail = {MessageID:0,ById:'1000',Reason:"Redirect",ToId:0,FromUserName:''}
   private _mobileQueryListener: () => void;
+  currentUserIndex: number;
   constructor(
-    changeDetectorRef: ChangeDetectorRef, 
+    changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private router:Router,
     private as:AuthService,
@@ -73,13 +74,13 @@ export class ScholarRedirectComponent implements OnInit {
   this.displaystartNewChat();
 }
 /*  create new messgae subject */
-// scholarsContactList(){    
+// scholarsContactList(){
 //   this.spinner.show();
 //   this.bs.allUserScholar('Alims').pipe(map(x=>this.prepareScholarsContact(x))).subscribe(
-//     data => {   this.spinner.hide();      
+//     data => {   this.spinner.hide();
 //       this.scholars = data;   console.log(this.scholars[0])
 //      } ,
-//     error => console.log(error)        
+//     error => console.log(error)
 //   );
 // }
 scholarsContactList() {
@@ -90,7 +91,7 @@ scholarsContactList() {
         obj.pipe(map(x => this.prepareScholarsContact(x))).subscribe(
           data => {
             this.scholars = data;
-  
+
           },
           error => console.log(error)
         );
@@ -101,37 +102,37 @@ scholarsContactList() {
 prepareScholarsContact(data){
   data = data.sort((a, b) => new Date(a.LastOnlineTime).getTime() > new Date(b.LastOnlineTime).getTime() ? -1 : new Date(a.LastOnlineTime).getTime() < new Date(b.LastOnlineTime).getTime() ? 1 : 0);
   let temp = [];
-  let image = ''; 
-  for(let key in data){  
-   let  UserLoginStatus=data[key].UserLoginStatus.charAt(0).toUpperCase()+data[key].UserLoginStatus.toLowerCase().slice(1);  
+  let image = '';
+  for(let key in data){
+   let  UserLoginStatus=data[key].UserLoginStatus.charAt(0).toUpperCase()+data[key].UserLoginStatus.toLowerCase().slice(1);
 
    let lastLogin;
-   let res =  this.os.getDuration(data[key].LastOnlineTime);  
+   let res =  this.os.getDuration(data[key].LastOnlineTime);
    if(!res.online){
     if(UserLoginStatus=='Online'){
       UserLoginStatus='Away';
     }else if(UserLoginStatus=='Away'){
       // UserLoginStatus='Offline';
-    }  
-    } 
+    }
+    }
     if(res.value>0){
-      lastLogin=res.value+res.unit;   
+      lastLogin=res.value+res.unit;
     }else{
-      lastLogin='now' 
-    } 
+      lastLogin='now'
+    }
     let image = this.bs.getuserimage(data[key].ImageID, data[key].UserType, data[key].Gender);
     let nationality;
     if(data[key].Nationality.length>12){
       nationality = data[key].Nationality +' ...'
     }else{
-         nationality = data[key].Nationality 
+         nationality = data[key].Nationality
     }
     temp.push({
       userId: data[key].UserID,
       date: data[key].LastOnlineTime,
       name: data[key].Name,
-      lastLogin: lastLogin, 
-      image: image, 
+      lastLogin: lastLogin,
+      image: image,
       role: data[key].UserType,
       location: data[key].Location,
       email:data[key].UserName,
@@ -141,7 +142,7 @@ prepareScholarsContact(data){
       specialisationIn: data[key].SpecialisationIn,
       studiesAt: data[key].StudiesAt,
       UserLoginStatus:UserLoginStatus
-    })   
+    })
  }
 
  let result;
@@ -152,8 +153,8 @@ prepareScholarsContact(data){
  let offline = temp.filter(x=>x.UserLoginStatus=='Offline');
  offline=offline.sort((a, b) => new Date(a.date).getTime() > new Date(b.date).getTime() ? -1 : new Date(a.date).getTime() < new Date(b.date).getTime() ? 1 : 0);
 
- result=  online.concat(away);  
- result=  result.concat(offline);  
+ result=  online.concat(away);
+ result=  result.concat(offline);
   return result;
 }
 /*  end create new messgae subject */
@@ -165,12 +166,13 @@ prepareScholarsContact(data){
     );
   }
 
-  currentUser(user){   
+  currentUser(user, i){
+    this.currentUserIndex = i;
     localStorage.setItem('currentUser',JSON.stringify(user));
-    this.closeLeftSideNav()  
+    this.closeLeftSideNav()
     this.sumcus.sendCurrentUserDetail(user);
   }
-  closeLeftSideNav(){    
+  closeLeftSideNav(){
     var data = {left:!this.mobileQuery.matches,right:false}
     this.openCloseSidebarService.openCloseSideNav(data);
    }
@@ -190,7 +192,7 @@ prepareScholarsContact(data){
     confirm(){
       this.selectedScholar = this.scholars.filter(x=>x.userId==this.sli)[0]
       this.redirectDetail= JSON.parse(localStorage.getItem('redirect_detail'));
-      this.redirectDetail.ToId = this.sli;  
+      this.redirectDetail.ToId = this.sli;
       this.bs.scholarRedirect(this.redirectDetail).subscribe(
         data =>{
 
@@ -210,7 +212,7 @@ prepareScholarsContact(data){
     }
     openLeftSideNav() {
       var data = { left:true, right:false }
-      this.openCloseSidebarService.openCloseSideNav(data);   
+      this.openCloseSidebarService.openCloseSideNav(data);
     }
        updatetofb(){
       let data = JSON.parse(localStorage.getItem('redirect_detail_fb'));
@@ -221,7 +223,7 @@ prepareScholarsContact(data){
       let tempData={   Subject : data.Subject,
         ayatollah : data.ayatollah,
         Text : data.Text,
-        To : this.selectedScholar.email,      
+        To : this.selectedScholar.email,
         ToUserID : this.selectedScholar.userId,
         ToName : this.selectedScholar.name,
         ToImageID : this.selectedScholar.ImageID,
@@ -229,7 +231,7 @@ prepareScholarsContact(data){
         FromUserID : data.FromUserID,
         FromName : data.FromName,
         FromImageID : data.FromImageID,
-        MessageStatus : 'APPROVE' , 
+        MessageStatus : 'APPROVE' ,
         MessageID : data.MessageID,
         CreatedDate : data.CreatedDate,
         IsVoice : data.IsVoice,
@@ -238,16 +240,16 @@ prepareScholarsContact(data){
         FromUserType : data.FromUserType,
         FileContextText : data.FileContextText,
         ContentType : data.ContentType
-        
+
       }
 
-       this.db.object('atwk_chat_rooms/' + this.sha1VarOld + '/'+msgId).remove(); 
-       this.db.object('atwk_latest_subject/' + data.FromUserID + '/'+ this.sha1VarOld).remove(); 
-       this.db.object('atwk_moderator_review/'+ '/'+msgId).remove(); 
-       
-       this.db.object('atwk_chat_rooms/' + this.sha1Var + '/'+msgId).update(tempData); 
-       this.db.object('atwk_latest_subject/' +data.FromUserID+ '/'+this.sha1Var ).update(tempData); 
-       this.db.object('atwk_latest_subject/' + this.selectedScholar.userId + '/'+ this.sha1Var).update(tempData); 
-     
+       this.db.object('atwk_chat_rooms/' + this.sha1VarOld + '/'+msgId).remove();
+       this.db.object('atwk_latest_subject/' + data.FromUserID + '/'+ this.sha1VarOld).remove();
+       this.db.object('atwk_moderator_review/'+ '/'+msgId).remove();
+
+       this.db.object('atwk_chat_rooms/' + this.sha1Var + '/'+msgId).update(tempData);
+       this.db.object('atwk_latest_subject/' +data.FromUserID+ '/'+this.sha1Var ).update(tempData);
+       this.db.object('atwk_latest_subject/' + this.selectedScholar.userId + '/'+ this.sha1Var).update(tempData);
+
     }
 }

@@ -1,6 +1,6 @@
      <div  fxFlex="auto" fxLayoutAlign="space-around center" >
     <div class="inner-sidebar" fxFlex="100%">
-        <div class="input-container input-container-{{theme}}">           
+        <div class="input-container input-container-{{theme}}">
             <img *ngIf="!theme" class="icon icon-img {{theme}}" src="assets/images/light/search.svg">
             <img *ngIf="theme" class="icon icon-img {{theme}}" src="assets/images/dark/search.svg">
             <input [class.field-ch]="!!searchKeyScholar" [(ngModel)]="searchKeyScholar" type="text" class="input-field {{theme}}" ngModel placeholder="Search"  id="serch" #search >
@@ -8,8 +8,9 @@
 
         </div>
         <div class="sidenav ">
-            <div class="user-list" *ngFor="let user of scholars | scholarFilter:searchKeyScholar; let i = index;">
-            <label for="{{i}}">
+            <div *ngFor="let user of scholars | scholarFilter:searchKeyScholar; let i = index;">
+              <div class="user-list" [ngClass]="{'selected': currentUserIndex === i}">
+              <label for="{{i}}">
                 <div class="cursor-pointer">
                     <div fxFlex="48px" class="profile-image">
                         <img *ngIf="theme" class="user-image" src="{{user.image.darkImage}}" alt="User Image">
@@ -18,19 +19,20 @@
 
                     </div>
                     <div fxFlex="auto" class="profile-data">
-                        <h5 cl><span [class.white-text]="theme" class="user-contact-name">{{user.name}}</span></h5>   
+                        <h5 cl><span [class.white-text]="theme" class="user-contact-name">{{user.name}}</span></h5>
                         <h6><span [class.white-text]="theme"  class="user-contact-subject ">{{user.nationality}}</span>
                             <span class=" last-login-dur {{user.UserLoginStatus}}-color"> &#x2022; {{user.lastLogin}}</span>
-                        </h6>                 
+                        </h6>
                     </div>
                     <div  class="radio-wrap"  >
-                        <span class="container">                                             
+                        <span class="container">
                             <input class="radio-{{theme}} input-ch" id="{{i}}" type="radio" name="sli" [(ngModel)]="sli" value="{{user.userId}}" >
                         </span>
                     </div>
                 </div>
-            </label>           
-            </div>      
+            </label>
+            </div>
+            </div>
         </div>
         <div class="bottom-action-wrap bg-{{theme}}">
             <!-- <div class="full">
@@ -41,6 +43,5 @@
             </div>
         </div>
     </div>
-    
+
     </div>
-    

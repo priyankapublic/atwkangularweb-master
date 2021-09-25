@@ -21,7 +21,7 @@ input.input-field {
 @media only screen and (max-width: 600px) {
 .sidenav{ height: calc(100vh - 184px);}
 }
-  
+
 .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
@@ -42,14 +42,14 @@ h5,h6,p{
 
 
 h5{
-  white-space: nowrap;    
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
 }
 h6{
-  white-space: nowrap;    
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
   margin-bottom: 0px !important;
 }
 .profile-data {
@@ -70,7 +70,11 @@ h6{
 .user-list {
   margin: 5px auto;
   width: 90%;
-  padding-bottom: 20px;
+  padding: 10px;
+  &:hover,
+  &.selected{
+    background-color: #c7a76d;
+  }
 }
 .profile-image {
   margin-right: 12px;
@@ -138,7 +142,7 @@ input.false::-ms-input-placeholder { /* Microsoft Edge */
   margin: 0px auto;
   margin-top: 10px !important;
 }
-.input-field-bottom{  
+.input-field-bottom{
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   margin: 0px auto;
@@ -167,7 +171,7 @@ p.line {
 }
 
 .bottom-action-wrap{
-  text-align: center; 
+  text-align: center;
   height: 48px;
 }
 .half{
@@ -204,21 +208,21 @@ button.mat-stroked-button.mat-button-base.mat-warn{
     transition: .2s;
     cursor:pointer;
     color: #363945;
-  
+
     &:checked {
       background: #3A6CC1;
       box-shadow:
       inset 0 0 0 .4em #001f52,
       0 0 0 .2em;
     }
-    
+
     &:checked {
       background: #3A6CC1;
       box-shadow:
         inset 0 0 0 .4em #001f52,
         0 0 0 .2em #3A6CC1;
-    } 
-  
+    }
+
     &:focus { outline: 0; }
   }
 
@@ -236,24 +240,24 @@ button.mat-stroked-button.mat-button-base.mat-warn{
     transition: .2s;
     cursor:pointer;
     color: #363945;
-  
+
     &:checked {
       background: #3A6CC1;
       box-shadow:
       inset 0 0 0 .4em white,
       0 0 0 .2em;
     }
-    
+
     &:checked {
       background: #3A6CC1;
       box-shadow:
         inset 0 0 0 .4em white,
         0 0 0 .2em #3A6CC1;
-    } 
-  
+    }
+
     &:focus { outline: 0; }
   }
-  
+
   button.mat-raised-button.mat-button-base.mat-warn:disabled {
     background-color: #c7a76d !important;
     cursor: not-allowed !important;

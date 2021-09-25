@@ -30,9 +30,10 @@ export class PendingContactListComponent implements OnInit {
   showMenuVar:Boolean = false;
   chatMode:Boolean = true;
   pendingqueries:Pendingqueries[];
+  currentUserIndex: number;
   private _mobileQueryListener: () => void;
   constructor(
-    changeDetectorRef: ChangeDetectorRef, 
+    changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private router:Router,
     private as:AuthService,
@@ -78,50 +79,52 @@ export class PendingContactListComponent implements OnInit {
       data => {if(data==true){this.contactList()}}
     )
     }
-  contactList(){    
+  contactList(){
     this.spinner.show();
     // .pipe(map(x=>this.prepareContact(x)))
     this.bs.getPendingQueryAlimsWithCount().pipe(map(x=>this.prepareContact(x))).subscribe(
-      data => {  this.spinner.hide(); 
+      data => {  this.spinner.hide();
             this.pendingqueries =data;
-          if(!this.mobileQuery.matches){  
-            // this.currentUser(0)  
+          if(!this.mobileQuery.matches){
+            // this.currentUser(0)
            }
        } ,
-      error => console.log(error)        
+      error => console.log(error)
     );
   }
-  prepareContact(data){  
-     for(let key in data){  
+  prepareContact(data){
+     for(let key in data){
       data[key].image =  this.bs.getuserimage(data[key].ScholarsImageID,'MODERATOR','Male');
       data[key].UnreadMessageCount = parseInt(data[key].UnreadMessageCount);
     }
-    return data.sort((a, b) => a.UnreadMessageCount > b.UnreadMessageCount ? -1 : a.UnreadMessageCount < b.UnreadMessageCount ? 1 : 0); 
+    return data.sort((a, b) => a.UnreadMessageCount > b.UnreadMessageCount ? -1 : a.UnreadMessageCount < b.UnreadMessageCount ? 1 : 0);
   }
-   
+
   changeTheme(){
-    this.ts.changeTheme$.subscribe( 
+    this.ts.changeTheme$.subscribe(
       data =>{this.theme=data; }
     );
   }
 
-  currentUser(i:number){      
+  currentUser(i:number){
+    debugger;
+    this.currentUserIndex  = i;
     let user =this.pendingqueries[i];
     localStorage.setItem('currentUser',JSON.stringify(user));
-    this.closeLeftSideNav()  
+    this.closeLeftSideNav()
     // this.sscus.sendCurrentUserDetail(user);
     this.userProfileService.sendUserProfile(user)
-    let data = this.goTo('app-pending-queries','Scholar');   
-    this.sendDataToRightPan(data);  
+    let data = this.goTo('app-pending-queries','Scholar');
+    this.sendDataToRightPan(data);
   }
-  closeLeftSideNav(){    
+  closeLeftSideNav(){
     var data = {left:!this.mobileQuery.matches,right:true}
     this.openCloseSidebarService.openCloseSideNav(data);
    }
    sendDataToRightPan(data: any) {
     this.menuDataToRightPanService.rightPanData(data);
   }
-  goTo(tag:string,title:string){  
+  goTo(tag:string,title:string){
     this.dataArray.tag=tag;
     this.dataArray.title=title;
     return this.dataArray;

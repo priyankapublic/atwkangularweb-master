@@ -56,15 +56,21 @@ span.cur-date {
     font-size: 25px;
     color: #818181;
     display: block;
-  }  
-  
-  
+  }
+
+
   h5,h6,p{
   margin-top: 0px !important;
   margin-bottom: 5px !important;
   }
-  .user-list{
-    margin-bottom: 10px;
+  .user-list {
+    margin: 5px auto;
+    width: 90%;
+    padding: 10px;
+    &:hover,
+    &.selected{
+      background-color: #c7a76d;
+    }
   }
   .profile-image {
   position: relative;
@@ -74,14 +80,14 @@ span.cur-date {
 
 
   h5{
-  white-space: nowrap;    
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
   }
   h6{
-  white-space: nowrap;    
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
   }
   .profile-data {
   overflow: hidden !important;
@@ -90,7 +96,7 @@ span.cur-date {
   .input-wrap {
     padding: 0px 13px;
 }
-  
+
   .input-container {
     width: 97%!important;
     margin: 12px auto!important;
@@ -109,7 +115,7 @@ span.cur-date {
 .question {
   font-size: 18px;
   font-family: SF Text Light;
-  border-radius: 18px;  
+  border-radius: 18px;
   display: inline-block;
   margin-bottom: 20px;
   width: 100%;
@@ -201,17 +207,17 @@ img.fav-icon {
 		color:#A3ADB7;
 		opacity: 1; /* Firefox */
 	  }
-	  
+
      :-ms-input-placeholder { /* Internet Explorer 10-11 */
 		color:#A3ADB7;
 	  }
-	  
+
      ::-ms-input-placeholder { /* Microsoft Edge */
 		color:#A3ADB7;
 	  }
 
 
-	  
+
 	  .input-field{
 		  background-color: transparent;
 	  }
@@ -222,7 +228,7 @@ img.fav-icon {
 		border-radius: 100px;
 	}
 
-	
+
 .toggle-switch input[type=checkbox] {display:none}
 .toggle-switch label {cursor:pointer;}
 .toggle-switch label .toggle-track {
@@ -270,7 +276,7 @@ img.fav-icon {
 
 .btn-ch{
     width: 80%;  margin-bottom: 20px;
-    border-radius: 20px;   
+    border-radius: 20px;
 }
 .btn-text-ch{
     font-size: 14 px;
@@ -280,13 +286,13 @@ img.fav-icon {
    color :$mat-warn-main !important;
 }
 .de-false{
-    color: $danger !important;   
+    color: $danger !important;
 }
 .btn-logout{
     border: 1.5px solid $mat-warn-main !important;
 }
 .btn-deactivate{
-    border: 1.5px solid $danger !important;   
+    border: 1.5px solid $danger !important;
 }
 
 .toggle-wrap {

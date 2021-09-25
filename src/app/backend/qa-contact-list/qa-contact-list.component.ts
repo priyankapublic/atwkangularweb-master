@@ -43,6 +43,7 @@ export class QaContactListComponent implements OnInit {
   tagMainKey = [];
   selectedformTags;
   private _mobileQueryListener: () => void;
+  currentUserIndex: number;
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
@@ -64,7 +65,7 @@ export class QaContactListComponent implements OnInit {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
-  ngOnInit() { 
+  ngOnInit() {
     if (!('indexedDB' in window)) {
       Swal.fire({
         title: 'This browser doesn\'t QNA',
@@ -72,7 +73,7 @@ export class QaContactListComponent implements OnInit {
         imageWidth: 120,
         // imageHeight: 107,
         showCancelButton: false,
-        confirmButtonText: 'OK',      
+        confirmButtonText: 'OK',
         allowOutsideClick: false,
         customClass: {
           popup: 'sky-blue-bg del-popup-size',
@@ -100,7 +101,7 @@ export class QaContactListComponent implements OnInit {
   }
   viewImg(img:string){
     this.os.swallImage(img.slice(0, img.indexOf('?')))
-  }  
+  }
  RefeshQna(){
    this.refeshQnaService.refreshQna$.subscribe(
      data=>{ if(data==true){
@@ -124,7 +125,7 @@ export class QaContactListComponent implements OnInit {
         //   }
         // }
         // this.idbService.insertQNAindexedDb(tempQnaLIst)
-        // localStorage.setItem('qnaData',JSON.stringify(tempQnaLIst))     
+        // localStorage.setItem('qnaData',JSON.stringify(tempQnaLIst))
       }
     )
   }
@@ -132,15 +133,15 @@ export class QaContactListComponent implements OnInit {
     this.openQnaTagFilterService.qnaTagFilter$.subscribe(
       data =>{
         if(this.showTagFilter==true){
-          this.showTagFilter = false; 
+          this.showTagFilter = false;
         }else{
-          this.showTagFilter = true; 
-        }    
+          this.showTagFilter = true;
+        }
           // this.tagMainKey = []
         }
     )
   }
-  allQNA() {    
+  allQNA() {
     this.spinner.show();
 // --------------------------------
 let data;
@@ -154,7 +155,7 @@ request.onsuccess = function(event) {
 setTimeout(() => {
   this.spinner.hide();
   this.qnaList =data.result;
-  this.getTags(); 
+  this.getTags();
 }, 2000);
 // --------------------------------
 }
@@ -162,9 +163,9 @@ setTimeout(() => {
   getTags() {
     let sn =0;
     for (let key in this.qnaList) {
-      for (let k in this.qnaList[key].tags) {             
-             if (this.tags.filter(x=>x.value==this.qnaList[key].tags[k]).length==0) {     
-            this.tags.push({sn:sn++,value:this.qnaList[key].tags[k],selected:false});         
+      for (let k in this.qnaList[key].tags) {
+             if (this.tags.filter(x=>x.value==this.qnaList[key].tags[k]).length==0) {
+            this.tags.push({sn:sn++,value:this.qnaList[key].tags[k],selected:false});
           // this.tags.push(this.qnaList[key].tags[k]);
         }
       }
@@ -172,15 +173,16 @@ setTimeout(() => {
 
   }
   currentUser(user,i:number) {
+    this.currentUserIndex = i;
     setTimeout(() => {
      let temp=[]
       this.qnaList[i].count=this.qnaList[i].count+1;
        this.idbService.updateSingleQNAindexedDb(this.qnaList[i]);
-     }, 1000);  
+     }, 1000);
 
     this.closeLeftSideNav()
     this.sqcus.sendCurrentUserDetail(user);
- 
+
     // localStorage.setItem('qnaData',JSON.stringify( this.qnaList))
   }
   ngOnDestroy(): void {
@@ -197,14 +199,14 @@ setTimeout(() => {
     );
   }
 
-  closeLeftSideNav() {    
+  closeLeftSideNav() {
     var data = { left: !this.mobileQuery.matches, right: false }
     this.openCloseSidebarService.openCloseSideNav(data);
   }
   filter(val:boolean){
     this.filtertKey =val;
    if(val){
-    this.sortActive.left = false;this.sortActive.right = true;    
+    this.sortActive.left = false;this.sortActive.right = true;
    }else{
     this.sortActive.left = true;this.sortActive.right = false;
    }
@@ -264,14 +266,14 @@ setTimeout(() => {
      this.showTagFilter = false;
   }
 
-  cancelTagFilter() {  
+  cancelTagFilter() {
     this.showTagFilter = false;
   }
   claerAll(){
     this.tagMainKey = [];
     this.sort('latest');
     this.filter(false)
-    for (let key in this.tags) {  
+    for (let key in this.tags) {
          this.tags[key].selected=false;
     }
   }

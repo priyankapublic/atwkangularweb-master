@@ -29,6 +29,8 @@ export class ModeratorContactListComponent implements OnInit {
   theme: boolean;
   mobileQuery: MediaQueryList;
   chatMode: Boolean = true;
+  currentUserIndex: number = null;
+
   private _mobileQueryListener: () => void;
   userList: Currentuser[];
   constructor(
@@ -65,8 +67,8 @@ export class ModeratorContactListComponent implements OnInit {
   firebaseData(){
     this.db.object('atwk_moderator_review').valueChanges().pipe(map(x=>this.prepareFirbase(x))).subscribe(
       data=>{
-        if(data.length>0){       
-          this.contactListFirebase(data);   
+        if(data.length>0){
+          this.contactListFirebase(data);
           }else{
             this.userList=[];
             this.msgcountReloadService.mcReloadFun(0)
@@ -80,19 +82,19 @@ export class ModeratorContactListComponent implements OnInit {
      for(let key in x){
        temp.push(x[key])
      }
-   return temp; 
+   return temp;
   }
   refressUser(){
-   
+
     this.firebaseData();
     // this.spinner.show();
-    // this.contactList(true);  
+    // this.contactList(true);
    }
   refresscontactList() {
     this.reloadService.ReloadService$.subscribe(
       data => {
-        if (data == true) {   
-          if (localStorage.getItem('prfileHostoryTag') == 'home') {      
+        if (data == true) {
+          if (localStorage.getItem('prfileHostoryTag') == 'home') {
             this.firebaseData();
             // this.contactList(false)
           }
@@ -101,39 +103,39 @@ export class ModeratorContactListComponent implements OnInit {
     )
 
   }
-  contactListFirebase(tempData){  
+  contactListFirebase(tempData){
     let obj = of(tempData.reverse())
     obj.pipe(map(x=>this.prepareContact(x))).subscribe(
       data => {  this.spinner.hide();this.userList = data;  this.msgcountReloadService.mcReloadFun(this.userList.length);
         if(!this.mobileQuery.matches){
           // if(chk){
             this.currentUser(0);
-        //  }       
+        //  }
         }
        } ,
-      error =>{ console.log(error); this.spinner.hide();}        
+      error =>{ console.log(error); this.spinner.hide();}
     );
   }
 
-  // contactList(chk){    
+  // contactList(chk){
   //   this.bs.getModiatorNotification().pipe(map(x=>this.prepareContact(x))).subscribe(
   //     data => {  this.spinner.hide();this.userList = data;  this.msgcountReloadService.mcReloadFun(this.userList.length);
   //       if(!this.mobileQuery.matches){
   //         // if(chk){
   //           this.currentUser(0);
-  //       //  }       
+  //       //  }
   //       }
   //      } ,
-  //     error =>{ console.log(error); this.spinner.hide();}        
+  //     error =>{ console.log(error); this.spinner.hide();}
   //   );
   // }
-    prepareContact(data){   
+    prepareContact(data){
        let temp = [];
       let temp2 = data;
       let image = '';
-      for(let key in data){     
-        if(this.as.getLocalStorage().email !==data[key].To.toLowerCase()){     
-       let res =  this.os.getDuration(this.os.changeTimeZone(data[key].CreatedDate));  
+      for(let key in data){
+        if(this.as.getLocalStorage().email !==data[key].To.toLowerCase()){
+       let res =  this.os.getDuration(this.os.changeTimeZone(data[key].CreatedDate));
        temp2[key].createdDate = this.os.changeTimeZone(data[key].CreatedDate);
        let  role = data[key].FromUserType;
        let lastMsg = '';
@@ -149,20 +151,21 @@ export class ModeratorContactListComponent implements OnInit {
           } else {
             lastMsg = data[key].Text;
           }
-        } 
+        }
        let  image =  this.bs.getuserimage(data[key].FromImageID,role,'Not Avilable')
         temp.push({IsRead:data[key].IsRead, IsReplied:data[key].IsReplied,ayatollah:data[key].ayatollah,date:data[key].ToLastOnlineTime,fromName:data[key].FromName,toName:data[key].ToName,lastLogin:res.value+res.unit ,online:res.online,image:image,email:data[key].To,lastMessage:lastMsg,subject:data[key].Subject,role:role,messageId:data[key].MessageID})
       }
       }
-      this.conversations=temp2; 
+      this.conversations=temp2;
       return temp;
     }
 
-  currentUser(i:number) {  
+  currentUser(i:number) {
+    this.currentUserIndex = i;
     this.closeLeftSideNav()
    if(this.conversations.length >0){
       this.smcus.sendCurrentUserDetail(this.conversations[i]);
-   }   
+   }
   }
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
@@ -173,7 +176,7 @@ export class ModeratorContactListComponent implements OnInit {
     );
   }
 
-  closeLeftSideNav() {    
+  closeLeftSideNav() {
     var data = { left: !this.mobileQuery.matches, right: false }
     this.openCloseSidebarService.openCloseSideNav(data);
   }

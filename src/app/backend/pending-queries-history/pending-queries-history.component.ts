@@ -32,67 +32,69 @@ export class PendingQueriesHistoryComponent implements OnInit {
   userId:string;
   email:string;
   myEmail:string;
+  currentUserIndex:number;
   userdetail:{Location:'',Nationality:'',Language:'',SpecialisationIn:'',StudiesAt:'',Details:'',};
   private _mobileQueryListener: () => void;
   constructor(
-    changeDetectorRef: ChangeDetectorRef, 
+    changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private router:Router,
     private ts:ThemeService,
-    private bs:BackendService,  
-    private os:OtherService,  
+    private bs:BackendService,
+    private os:OtherService,
     private spinner: NgxSpinnerService,
     private userProfileService: UserProfileService,
     private scholarMessageHistoryService:ScholarMessageHistoryService,
     private as:AuthService,
     private openCloseSidebarService:OpenCloseSidebarService,
     private smcus: SendModeratorCurrentUserDetailService,
-    
+
     ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
-  ngOnInit(){  
+  ngOnInit(){
     this.profile =JSON.parse(localStorage.getItem('currentUser'));
     this.myEmail=this.as.getLocalStorage().email;
     this.changeTheme();
-    this.theme=this.ts.theme();  
+    this.theme=this.ts.theme();
     this.getprofile();
     this.getMsgHihtory()
   }
   viewImg(img:string){
     this.os.swallImage(img)
   }
-  currentUser(i:number) {   
+  currentUser(i:number) {
+     this.currentUserIndex = i;
      this.closeLeftSideNav()
      this.smcus.sendCurrentUserDetail(this.conversations[i]);
    }
-  getprofile(){    
+  getprofile(){
     this.userProfileService.userProfile$.subscribe(
       data=>{ this.profile=data; this.getMsgHihtory() },
       err=>console.log(err)
-      );    
+      );
   }
-  getMsgHihtory(){    
+  getMsgHihtory(){
     this.spinner.show()
     this.bs.pendingQueriesByScholar(this.profile.ScholarsUserName).pipe(map(x => this.prepareContact(x))).subscribe(
       data =>{
          this.spinner.hide();
-        this.userlist=data;     
+        this.userlist=data;
         },
       err=>console.log(err)
     )
   }
-  prepareContact(data) {      
+  prepareContact(data) {
     let temp = [];
     let temp2 = data;
     let image = '';
     let lastMsg = '';
     for (let key in data) {
-      let res =  this.os.getDuration(this.os.changeTimeZone(data[key].CreatedDate));  
+      let res =  this.os.getDuration(this.os.changeTimeZone(data[key].CreatedDate));
       temp2[key].CreatedDate = this.os.changeTimeZone(data[key].CreatedDate);
-      let role = 'USER';    
+      let role = 'USER';
       if (data[key].IsVoice == 'Y') {
         lastMsg = 'Audio';
       } else {
@@ -110,19 +112,19 @@ export class PendingQueriesHistoryComponent implements OnInit {
       let image = this.bs.getuserimage(data[key].FromImageID, role, 'Male')
       temp.push({ userId: data[key].UserID,  name: data[key].FromName,  image: image, email: data[key].From,lastMessage:lastMsg })
     }
-  
+
     this.conversations=temp2;
-    // console.log(this.conversations); 
+    // console.log(this.conversations);
     return temp;
   }
 
-  
+
   // getConversation(Subject:string,From:string){
   //   let data = {subject:Subject,from:From};
   //   this.scholarMessageHistoryService.messageHistoryFun(data);
   //   this.closeRightSideNav();
   // }
-  closeRightSideNav(){    
+  closeRightSideNav(){
     var data = {left:!this.mobileQuery.matches,right:false}
     this.openCloseSidebarService.openCloseSideNav(data);
    }
@@ -134,11 +136,11 @@ export class PendingQueriesHistoryComponent implements OnInit {
       data =>{this.theme=data; }
     );
   }
-  
+
   getChangeTheme(){
-    this.ts.changeTheme(this.theme);    
+    this.ts.changeTheme(this.theme);
   }
-  closeLeftSideNav() {    
+  closeLeftSideNav() {
     var data = { left: !this.mobileQuery.matches, right: false }
     this.openCloseSidebarService.openCloseSideNav(data);
   }

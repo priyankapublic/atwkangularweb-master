@@ -30,8 +30,9 @@ export class ChatHistoryUserContactListComponent implements OnInit {
   pendingqueries:Pendingqueries[];
   // selectedUserType={name: "Scholar", userType: "Alims"}
   private _mobileQueryListener: () => void;
+  currentUserIndex: number;
   constructor(
-    changeDetectorRef: ChangeDetectorRef, 
+    changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private router:Router,
     private as:AuthService,
@@ -72,33 +73,34 @@ export class ChatHistoryUserContactListComponent implements OnInit {
       data => this.showMenuVar = data
     )
   }
-  contactList(){    
+  contactList(){
     this.spinner.show();
-    // 
+    //
     this.bs.chatHistoryUsers(this.loginUser.userId).pipe(map(x=>this.prepareContact(x))).subscribe(
-      data => {  this.spinner.hide(); 
+      data => {  this.spinner.hide();
             this.pendingqueries =data;
           if(!this.mobileQuery.matches){
-          this.currentUser(this.pendingqueries[0])      }
+          this.currentUser(this.pendingqueries[0], null)      }
        } ,
-      error => console.log(error)        
+      error => console.log(error)
     );
   }
-  prepareContact(data){ 
-     for(let key in data){  
+  prepareContact(data){
+     for(let key in data){
       data[key].image =  this.bs.getuserimage(data[key].ScholarsImageID,'MODERATOR',data[key].Gender);
       data[key].otherimage =  this.bs.getuserimage(data[key].UsersImageID,'USER',data[key].Gender);
     }
     return data;
   }
-   
+
   changeTheme(){
     this.ts.changeTheme$.subscribe(
       data =>{this.theme=data; }
     );
   }
 
-  currentUser(user){   
+  currentUser(user, i){
+    this.currentUserIndex = i;
     this.scholarDetail.userId= user.ScholarsUserID;
     this.scholarDetail.name= user.ScholarsName;
     this.scholarDetail.email= user.ScholarsUserName;
@@ -106,10 +108,10 @@ export class ChatHistoryUserContactListComponent implements OnInit {
     this.scholarDetail.userEmail= user.UsersUserName;
     this.scholarDetail.showHistory= true;
     localStorage.setItem('currentUser',JSON.stringify(this.scholarDetail));
-    this.closeLeftSideNav()  
+    this.closeLeftSideNav()
     this.sscus.sendCurrentUserDetail(this.scholarDetail);
   }
-  closeLeftSideNav(){    
+  closeLeftSideNav(){
     var data = {left:!this.mobileQuery.matches,right:true}
     this.openCloseSidebarService.openCloseSideNav(data);
    }

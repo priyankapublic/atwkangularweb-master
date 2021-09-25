@@ -48,6 +48,7 @@ export class ChatContactListComponent implements OnInit {
   loginEmail: string;
   loginUserId: string;
   sha1Var: string;
+  currentUserIndex: number;
   private _mobileQueryListener: () => void;
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -86,21 +87,21 @@ export class ChatContactListComponent implements OnInit {
     this.displayqnaTagFilter() ;
     this.firebaseData();
   }
-  
+
   firebaseData() {
 
     this.spinner.show();
     this.db.object('atwk_latest_subject/'+this.loginUserId).valueChanges().pipe(map(x => this.prepareFirbase(x))).subscribe(
-      data => { 
-      
-        if (data.length > 0) {  
-          let temp= data.sort((a, b) => new Date(a.CreatedDate).getTime() > new Date(b.CreatedDate).getTime() ? -1 : new Date(a.CreatedDate).getTime() < new Date(b.CreatedDate).getTime() ? 1 : 0);     
-          this.spinner.hide();      
-            this.contactList(temp)      
+      data => {
+
+        if (data.length > 0) {
+          let temp= data.sort((a, b) => new Date(a.CreatedDate).getTime() > new Date(b.CreatedDate).getTime() ? -1 : new Date(a.CreatedDate).getTime() < new Date(b.CreatedDate).getTime() ? 1 : 0);
+          this.spinner.hide();
+            this.contactList(temp)
             if(this.role=='ALIM'){
               this.pushDatatoFirebase();
             }
-           }else{             
+           }else{
             this.pushDatatoFirebase();
             // this.firebaseData();
         }
@@ -113,14 +114,14 @@ export class ChatContactListComponent implements OnInit {
     for(let key in x){
       temp.push(x[key])
     }
-    return temp;  
+    return temp;
   }
   pushDatatoFirebase(){
     this.bs.contactList(this.as.getLocalStorage().email).subscribe(
-      data => {  
+      data => {
         // console.log(data)
             if(data && data.length==0){ this.spinner.hide();  }
-            
+
               let tempData={};
                let i=0;
                 for(let key in data) {
@@ -138,7 +139,7 @@ export class ChatContactListComponent implements OnInit {
                   FromName : data[key].FromName,
                   ToImageID : data[key].ToImageID,
                   FromImageID : data[key].FromImageID,
-                  MessageStatus : data[key].MessageStatus, 
+                  MessageStatus : data[key].MessageStatus,
                   MessageID : data[key].MessageID,
                   CreatedDate : data[key].CreatedDate,
                   IsVoice : data[key].IsVoice,
@@ -170,11 +171,11 @@ export class ChatContactListComponent implements OnInit {
   }
   isreplyedRefresh(){
     this.isreplyedRefreshService.replyedRefreshService$.subscribe(
-      data =>{    
+      data =>{
           let   index = this.userList.findIndex(x => x.messageId==data);
           if(this.userList[index]){
-            this.userList[index].IsReplied='Y';    
-            this.sendMsgcountReloadService() 
+            this.userList[index].IsReplied='Y';
+            this.sendMsgcountReloadService()
           }
       }
     )
@@ -187,7 +188,7 @@ export class ChatContactListComponent implements OnInit {
           obj = of(data);
           obj.pipe(map(x => this.prepareScholarsContact(x))).subscribe(
             data => {
-              this.scholars = data;                
+              this.scholars = data;
             },
             error => console.log(error)
           );
@@ -198,12 +199,12 @@ export class ChatContactListComponent implements OnInit {
   prepareScholarsContact(data) {
     data = data.sort((a, b) => new Date(a.LastOnlineTime).getTime() > new Date(b.LastOnlineTime).getTime() ? -1 : new Date(a.LastOnlineTime).getTime() < new Date(b.LastOnlineTime).getTime() ? 1 : 0);
     let temp = [];
-    let image = ''; 
-    for(let key in data){  
- 
+    let image = '';
+    for(let key in data){
+
      let lastLogin;
-     let res =  this.os.getDuration(data[key].LastOnlineTime);  
-     let UserLoginStatus=data[key].UserLoginStatus.charAt(0).toUpperCase()+data[key].UserLoginStatus.toLowerCase().slice(1);  
+     let res =  this.os.getDuration(data[key].LastOnlineTime);
+     let UserLoginStatus=data[key].UserLoginStatus.charAt(0).toUpperCase()+data[key].UserLoginStatus.toLowerCase().slice(1);
 
      if(!res.online){
 
@@ -211,26 +212,26 @@ export class ChatContactListComponent implements OnInit {
         UserLoginStatus='Away';
       }else if(UserLoginStatus=='Away'){
         // UserLoginStatus='Offline';
-      }      
-      } 
+      }
+      }
       if(res.value>0){
-        lastLogin=res.value+res.unit;   
+        lastLogin=res.value+res.unit;
       }else{
-        lastLogin='now' 
-      } 
+        lastLogin='now'
+      }
       let image = this.bs.getuserimage(data[key].ImageID, data[key].UserType, data[key].Gender);
       let nationality;
       if(data[key].Nationality.length>12){
         nationality = data[key].Nationality +' ...'
       }else{
-           nationality = data[key].Nationality 
+           nationality = data[key].Nationality
       }
       temp.push({
         userId: data[key].UserID,
         date: data[key].LastOnlineTime,
         name: data[key].Name,
-        lastLogin: lastLogin, 
-        image: image, 
+        lastLogin: lastLogin,
+        image: image,
         role: data[key].UserType,
         location: data[key].Location,
         email:data[key].UserName,
@@ -240,7 +241,7 @@ export class ChatContactListComponent implements OnInit {
         specialisationIn: data[key].SpecialisationIn,
         studiesAt: data[key].StudiesAt,
         UserLoginStatus:UserLoginStatus
-      })   
+      })
    }
    let result;
    let online = temp.filter(x=>x.UserLoginStatus=='Online');
@@ -249,9 +250,9 @@ export class ChatContactListComponent implements OnInit {
    away=away.sort((a, b) => new Date(a.date).getTime() > new Date(b.date).getTime() ? -1 : new Date(a.date).getTime() < new Date(b.date).getTime() ? 1 : 0);
    let offline = temp.filter(x=>x.UserLoginStatus=='Offline');
    offline=offline.sort((a, b) => new Date(a.date).getTime() > new Date(b.date).getTime() ? -1 : new Date(a.date).getTime() < new Date(b.date).getTime() ? 1 : 0);
-  
-   result=  online.concat(away);  
-   result=  result.concat(offline);  
+
+   result=  online.concat(away);
+   result=  result.concat(offline);
     return result;
   }
 
@@ -259,7 +260,7 @@ export class ChatContactListComponent implements OnInit {
 
 
 
-  
+
   /*  end create new messgae subject */
   refressUser(){
   //  this.contactList();
@@ -271,10 +272,10 @@ export class ChatContactListComponent implements OnInit {
     let obs = of(temp);
     //  this.spinner.show();
     obs.pipe(map(x => this.prepareContact(x))).subscribe(
-      data => {  
-      
+      data => {
+
         this.spinner.hide(); this.userList = data;  this.scholarsContactList();
-        this.sendMsgcountReloadService() ;      
+        this.sendMsgcountReloadService() ;
         // if (!this.mobileQuery.matches) {
         //   this.currentUser(this.userList[0], 0);
         // }
@@ -292,8 +293,8 @@ export class ChatContactListComponent implements OnInit {
         this.msgcountReloadService.mcReloadFun(x.length)
       }
   }
-  prepareContact(data) {  
-   
+  prepareContact(data) {
+
     let role;
     let name: string;
     if (this.as.getLocalStorage().role == 'USER') {
@@ -302,16 +303,16 @@ export class ChatContactListComponent implements OnInit {
       role = 'USER';
     }
     let temp = [];
-    let image;    
+    let image;
     let lastLogin
     let isReplied;
     let isRead;
-    let email; 
+    let email;
     let toEmail;
     let status ;
     for (let key in data) {
       if(data[key].To!=undefined){
-      let res = this.os.getDuration(this.os.changeTimeZone(data[key].CreatedDate));      
+      let res = this.os.getDuration(this.os.changeTimeZone(data[key].CreatedDate));
       let lastMsg = '';
       let userId ='';
       if (data[key].IsVoice == 'Y') {
@@ -330,7 +331,7 @@ export class ChatContactListComponent implements OnInit {
       // if(data[key].To==undefined){
       //   console.log(data[key])
       // }
-      
+
       if ( this.as.getLocalStorage().email !== data[key].To.toLowerCase()) {
 
         status = this.os.getDuration(this.os.changeTimeZone(data[key].CreatedDate));
@@ -343,8 +344,8 @@ export class ChatContactListComponent implements OnInit {
           image = this.bs.getuserimage(data[key].ToImageID, role, 'Not Avilable')
         }
 
-        email = data[key].To; 
-        userId = data[key].ToUserID; 
+        email = data[key].To;
+        userId = data[key].ToUserID;
         isReplied = 'Z';
         isRead = 'Z';
       } else {
@@ -357,36 +358,36 @@ export class ChatContactListComponent implements OnInit {
           name = data[key].FromName;
           image = this.bs.getuserimage(data[key].FromImageID, role, 'Not Avilable')
         }
-        email = data[key].From; 
-        userId = data[key].FromUserID; 
-        isReplied =data[key].IsReplied;      
-        isRead =data[key].IsRead;      
+        email = data[key].From;
+        userId = data[key].FromUserID;
+        isReplied =data[key].IsReplied;
+        isRead =data[key].IsRead;
       }
 
       if(res.value>0){
-        lastLogin=res.value+res.unit;   
+        lastLogin=res.value+res.unit;
       }else{
-        lastLogin='now' 
-      } 
+        lastLogin='now'
+      }
       temp.push({userId:userId,IsRead:isRead, IsReplied: isReplied, ayatollah: data[key].ayatollah, date: data[key].CreatedDate, name: name,
          lastLogin: lastLogin, online:status.online, image: image, email: email, toEmail: data[key].To,  lastMessage: lastMsg, subject: data[key].Subject, role: role, messageId: data[key].MessageID })
 
     }
   }
-   
-    if (this.role == 'ALIM') {    
+
+    if (this.role == 'ALIM') {
       let temp1 = temp.filter(x=>x.IsReplied=='N');
-      let temp2 = temp.filter(x=>x.IsReplied!='N'); 
+      let temp2 = temp.filter(x=>x.IsReplied!='N');
       this.latestUserList = temp1.concat(temp2);
       this.oldestUserList  = temp1.reverse().concat(temp2.reverse());
-      return this.latestUserList;  
+      return this.latestUserList;
     } else {
       let temp1 = temp.filter(x=>x.IsRead=='N');
-      let temp2 = temp.filter(x=>x.IsRead!='N'); 
+      let temp2 = temp.filter(x=>x.IsRead!='N');
       this.latestUserList = temp1.concat(temp2);
       this.oldestUserList  = temp1.reverse().concat(temp2.reverse());
-     
-      return this.latestUserList;   
+
+      return this.latestUserList;
     }
   }
 
@@ -398,6 +399,7 @@ export class ChatContactListComponent implements OnInit {
   }
 
   currentUser(user, i) {
+    this.currentUserIndex = i;
     localStorage.setItem('currentUser', JSON.stringify(user));
     this.closeLeftSideNav()
     this.sumcus.sendCurrentUserDetail(user);
@@ -405,7 +407,7 @@ export class ChatContactListComponent implements OnInit {
       this.updateIsRead(user.messageId);
       this.userList[i].IsRead = 'Y';
       // this.userList[i].IsReplied = 'Y';
-        this.sendMsgcountReloadService() 
+        this.sendMsgcountReloadService()
     }
 
   }

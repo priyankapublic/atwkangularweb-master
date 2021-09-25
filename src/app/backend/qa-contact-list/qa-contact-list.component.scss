@@ -51,14 +51,14 @@ h5,h6,p{
 
 
 h5{
-  white-space: nowrap;    
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
 }
 h6{
-  white-space: nowrap;    
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
   margin-bottom: 0px !important;
 }
 .profile-data {
@@ -85,7 +85,7 @@ h6{
   border: 3px solid $dark-sky-blue  ;
   color: white ;
   padding: 9px 24px; /* Some padding */
-  cursor: pointer; /* Pointer/hand icon */ 
+  cursor: pointer; /* Pointer/hand icon */
 }
 
 
@@ -101,7 +101,7 @@ h6{
 .btn-filter{
   font-size: 16px ;
   width: 50%;
-  font-family: SF Text Medium; 
+  font-family: SF Text Medium;
   background-color:  $dark-sky-blue  ;
   color: white;
 }
@@ -109,7 +109,7 @@ h6{
 .btn-sort{
   font-size: 16px ;
   width: 33.33%;
-  font-family: SF Text Medium; 
+  font-family: SF Text Medium;
   background-color:  $dark-sky-blue  ;
   color: white;
 }
@@ -129,7 +129,7 @@ div.active-false button.active {
   color: $dark-sky-blue  !important;
 }
 .bottom-action-wrap{
-  text-align: center; 
+  text-align: center;
   height: 48px;
 }
 .half{
@@ -139,15 +139,15 @@ div.active-false button.active {
 }
 .user-contact-name{
   width: 600px;
-  white-space: nowrap;    
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
 }
 .user-contact-last-msg{
   width: 600px;
-  white-space: nowrap;    
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
 }
 
 button.mat-stroked-button.mat-button-base.mat-warn{
@@ -182,13 +182,17 @@ button.warn-menu.mat-menu-item:hover{
   margin-bottom: 24px !important;
 }
 .input-container{
- border-radius: 100px;  
+ border-radius: 100px;
  border-radius:100px ;
 }
 .user-list {
   margin: 5px auto;
   width: 90%;
-  padding-bottom: 20px;
+  padding: 10px;
+  &:hover,
+  &.selected{
+    background-color: #c7a76d;
+  }
 }
 .profile-image {
   margin-right: 12px;
@@ -237,7 +241,7 @@ button.warn-menu.mat-menu-item:hover{
   content: "";
   position: absolute;
   display: none;
-  background-color: #3A6CC1; 
+  background-color: #3A6CC1;
 }
 
 /* Show the checkmark when checked */

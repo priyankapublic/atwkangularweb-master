@@ -1,7 +1,7 @@
 <div fxFlex="auto" fxLayoutAlign="space-around center">
     <div *ngIf="!showTagFilter" class="inner-sidebar" fxFlex="100%">
 
-        <div class="input-container input-container-{{theme}}"> 
+        <div class="input-container input-container-{{theme}}">
             <img *ngIf="!theme" class="icon icon-img {{theme}}" src="assets/images/light/search.svg">
             <img *ngIf="theme" class="icon icon-img {{theme}}" src="assets/images/dark/search.svg">
             <input [class.field-ch]="!!searchKey" [(ngModel)]="searchKey" type="text" class="input-field {{theme}}" ngModel placeholder="Search"  id="serch" #search >
@@ -10,23 +10,25 @@
         </div>
 
         <cdk-virtual-scroll-viewport itemSize="50" class="sidenav top-sidenav">
-            
-            <div class="user-list" *cdkVirtualFor="let qna of qnaList | qnaFilter:searchKey | sort:sortKey  | tagsMainFilter:tagMainKey  | likeFilter:filtertKey ; let i=index;">
+
+            <div *cdkVirtualFor="let qna of qnaList | qnaFilter:searchKey | sort:sortKey  | tagsMainFilter:tagMainKey  | likeFilter:filtertKey ; let i = index;">
+              <div class="user-list" [ngClass]="{'selected': currentUserIndex === i}">
                 <div class="cursor-pointer" >
-                    <div fxFlex="48px" class="profile-image">
-                        <img *ngIf="theme" class="user-image" (click)="viewImg(qna.scholar_image)" src="{{qna.scholar_image}}" alt="User Image" onError="this.src='assets/images/dark/s_m.svg'">
-                        <img *ngIf="!theme" class="user-image" (click)="viewImg(qna.scholar_image)" src="{{qna.scholar_image}}" alt="User Image" onError="this.src='assets/images/light/s_m.svg'">
-                    </div>
-                    <div fxFlex="auto" class="profile-data" (click)="currentUser(qna,i)">
-                        <h5><span [class.white-text]="theme" class="user-contact-name"[innerHTML]="qna.subject"></span></h5>
-                        <span
-                            class="last-login user-contact-last-login" [class.gold]="qna.count >0"> 
-                            <img *ngIf="qna.count >0" class="eye" src="assets/images/common/eye_gold.svg">
-                            <img *ngIf="qna.count ==0" class="eye" src="assets/images/common/eye_gray.svg">
-                            {{qna.count}}</span>
-                     
-                        <h6><span class="user-contact-last-msg">{{qna.scholar }}</span></h6>
-                    </div>
+                      <div fxFlex="48px" class="profile-image">
+                          <img *ngIf="theme" class="user-image" (click)="viewImg(qna.scholar_image)" src="{{qna.scholar_image}}" alt="User Image" onError="this.src='assets/images/dark/s_m.svg'">
+                          <img *ngIf="!theme" class="user-image" (click)="viewImg(qna.scholar_image)" src="{{qna.scholar_image}}" alt="User Image" onError="this.src='assets/images/light/s_m.svg'">
+                      </div>
+                      <div fxFlex="auto" class="profile-data" (click)="currentUser(qna,i)">
+                          <h5><span [class.white-text]="theme" class="user-contact-name"[innerHTML]="qna.subject"></span></h5>
+                          <span
+                              class="last-login user-contact-last-login" [class.gold]="qna.count >0">
+                              <img *ngIf="qna.count >0" class="eye" src="assets/images/common/eye_gold.svg">
+                              <img *ngIf="qna.count ==0" class="eye" src="assets/images/common/eye_gray.svg">
+                              {{qna.count}}</span>
+
+                          <h6><span class="user-contact-last-msg">{{qna.scholar }}</span></h6>
+                      </div>
+                  </div>
                 </div>
             </div>
         </cdk-virtual-scroll-viewport>
@@ -58,7 +60,7 @@
             <p ><span class="search-tag  search-tag-{{theme}}"> Search tags</span> <span class="claer" (click)="claerAll()" >Clear All</span></p>
             <span class="label label-{{theme}}">Write Scholar, Subject or Message Text to <br> create a tag</span>
         </div>
-        <div class="input-container input-container-{{theme}}"> 
+        <div class="input-container input-container-{{theme}}">
             <img *ngIf="!theme" class="icon icon-img {{theme}}" src="assets/images/light/search.svg">
             <img *ngIf="theme" class="icon icon-img {{theme}}" src="assets/images/dark/search.svg">
             <input [class.field-ch]="!!searchKey"  [(ngModel)]="searchKeyFilter" type="text" class="input-field {{theme}}" ngModel placeholder="Search"  id="serch" #search >
@@ -67,8 +69,8 @@
         </div>
 
         <cdk-virtual-scroll-viewport itemSize="50" class="sidenav bottom-sidenav">
-                <div class="user-list" *cdkVirtualFor="let tag of tags | tagsFilter:searchKeyFilter;let i=index">
-                    <div> 
+                <div  *cdkVirtualFor="let tag of tags | tagsFilter:searchKeyFilter;let i=index">
+                  <div class="user-list" [ngClass]="{'selected': currentUserIndex === i}">
                       <div fxFlex="auto" class="profile-data height">
                             <label class="mat-h6 dflex " for="{{i}}"><span [class.white-text]="theme"
                                     class="user-contact-name w80">{{tag.value}}  </span><span
@@ -81,7 +83,7 @@
                             </label>
                         </div>
                     </div>
-                </div>     
+                </div>
         </cdk-virtual-scroll-viewport>
         <!-- ======================= -->
         <div class="bottom-action-wrap">

@@ -12,8 +12,9 @@
         </div>
         <div class="sidenav top-sidenav" >
           <cdk-virtual-scroll-viewport itemSize="50" class="sidenav top-sidenav">
-            <div class="user-list" *cdkVirtualFor="let user of userList | modFilter:searchKey; let i=index;">
-                <div class="cursor-pointer" >
+            <div *cdkVirtualFor="let user of userList | modFilter:searchKey; let i = index;">
+              <div class="user-list" [ngClass]="{'selected': currentUserIndex === i}">
+              <div class="cursor-pointer"  >
                     <div fxFlex="48px" class="profile-image">
                         <img *ngIf="theme" class="user-image" (click)="viewImg(user?.image.darkImage)" src="{{user.image.darkImage}}" alt="User Image" (error)="user.image.darkImage=user.image.darkImageErr">
                         <img *ngIf="!theme" class="user-image" (click)="viewImg(user?.image.lightImage)" src="{{user.image.lightImage}}" alt="User Image" (error)="user.image.lightImage=user.image.lightImageErr">
@@ -26,6 +27,7 @@
                         <h6><span class="user-contact-last-msg">{{user.lastMessage | slice:0: 28 }} <span *ngIf="user.lastMessage>28"> .. </span></span><span class="last-login user-contact-last-login"> &#x2022; {{user.lastLogin}}</span></h6>
                     </div>
                 </div>
+              </div>
             </div>
             </cdk-virtual-scroll-viewport>
 

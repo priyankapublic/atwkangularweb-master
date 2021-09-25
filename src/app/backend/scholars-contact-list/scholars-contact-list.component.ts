@@ -30,8 +30,9 @@ export class ScholarsContactListComponent implements OnInit {
   scholars:Scholar[];
   selectedUserType={name: "Scholar", userType: "Alims"}
   private _mobileQueryListener: () => void;
+  currentUserIndex: number;
   constructor(
-    changeDetectorRef: ChangeDetectorRef, 
+    changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private router:Router,
     private as:AuthService,
@@ -51,7 +52,7 @@ export class ScholarsContactListComponent implements OnInit {
   }
   ngOnInit(){
     this.changeTheme();
-    if(this.as.getLocalStorage().role!='MODERATOR'){  
+    if(this.as.getLocalStorage().role!='MODERATOR'){
      this.contactList(this.selectedUserType.userType)
     }
     this.theme=this.ts.theme();
@@ -79,7 +80,7 @@ export class ScholarsContactListComponent implements OnInit {
       data => this.showMenuVar = data
     )
   }
-  contactList(userType:string){    
+  contactList(userType:string){
     let newUserType=userType.substring(0, userType.length-1).toLocaleUpperCase()
     let ref= this.db.database.ref('atwk_user_info');
     this.db.list('atwk_user_info',ref => ref.orderByChild('UserType').equalTo(newUserType)).valueChanges().subscribe(
@@ -87,41 +88,41 @@ export class ScholarsContactListComponent implements OnInit {
     )
   }
 
-  contactListNew(data){    
-    
+  contactListNew(data){
+
     let temp = of(data)
     temp.pipe(map(x=>this.prepareContact(x))).subscribe(
-      data => {          
-        this.scholars = data;   
+      data => {
+        this.scholars = data;
             if(!this.mobileQuery.matches){
           // this.currentUser(this.scholars[0]);
         }
        } ,
-      error => console.log(error)        
+      error => console.log(error)
     );
   }
-  prepareContact(data){   
+  prepareContact(data){
     data = data.sort((a, b) => new Date(a.LastOnlineTime).getTime() > new Date(b.LastOnlineTime).getTime() ? -1 : new Date(a.LastOnlineTime).getTime() < new Date(b.LastOnlineTime).getTime() ? 1 : 0);
 
     let temp = [];
-    let image = ''; 
-    for(let key in data){  
-     let UserLoginStatus=data[key].UserLoginStatus.charAt(0).toUpperCase()+data[key].UserLoginStatus.toLowerCase().slice(1);  
+    let image = '';
+    for(let key in data){
+     let UserLoginStatus=data[key].UserLoginStatus.charAt(0).toUpperCase()+data[key].UserLoginStatus.toLowerCase().slice(1);
 
      let lastLogin;
-     let res =  this.os.getDuration(data[key].LastOnlineTime);  
+     let res =  this.os.getDuration(data[key].LastOnlineTime);
      if(!res.online){
       if(UserLoginStatus=='Online'){
         UserLoginStatus='Away';
       }else if(UserLoginStatus=='Away'){
         // UserLoginStatus='Offline';
-      }  
-      } 
+      }
+      }
       if(res.value>0){
-        lastLogin=res.value+res.unit;   
+        lastLogin=res.value+res.unit;
       }else{
-        lastLogin='now' 
-      }    
+        lastLogin='now'
+      }
      let  image =  this.bs.getuserimage(data[key].ImageID, data[key].UserType,data[key].Gender)
      temp.push({
        userId:data[key].UserID,
@@ -148,26 +149,27 @@ export class ScholarsContactListComponent implements OnInit {
      away=away.sort((a, b) => new Date(a.date).getTime() > new Date(b.date).getTime() ? -1 : new Date(a.date).getTime() < new Date(b.date).getTime() ? 1 : 0);
      let offline = temp.filter(x=>x.UserLoginStatus=='Offline');
      offline=offline.sort((a, b) => new Date(a.date).getTime() > new Date(b.date).getTime() ? -1 : new Date(a.date).getTime() < new Date(b.date).getTime() ? 1 : 0);
-    
-     result=  online.concat(away);  
-     result=  result.concat(offline);  
+
+     result=  online.concat(away);
+     result=  result.concat(offline);
       return result;
- 
+
   }
-   
+
   changeTheme(){
     this.ts.changeTheme$.subscribe(
       data =>{this.theme=data; }
     );
   }
 
-  currentUser(user){   
+  currentUser(user, i){
+    this.currentUserIndex = i;
     user.showHistory= false;
     localStorage.setItem('currentUser',JSON.stringify(user));
     this.closeLeftSideNav() ;
     this.sscus.sendCurrentUserDetail(user);
   }
-  closeLeftSideNav(){    
+  closeLeftSideNav(){
     var data = {left:!this.mobileQuery.matches,right:true}
     this.openCloseSidebarService.openCloseSideNav(data);
    }
