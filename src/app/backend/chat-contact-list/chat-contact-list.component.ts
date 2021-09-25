@@ -472,7 +472,7 @@ export class ChatContactListComponent implements OnInit {
       userId: this.scholars[this.sli].userId
     }
     // this.userList.splice(0, 0, data);
-    this.currentUser(data, 0);
+    this.currentUser(data, null);
     this.showNewChat = 'chat-list'; this.subject = ''; this.ayatollah = '';
   }
   cancelnewChat() {

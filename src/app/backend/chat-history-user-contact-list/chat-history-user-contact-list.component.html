@@ -4,7 +4,7 @@
             <img *ngIf="!theme" class="icon icon-img {{theme}}" src="assets/images/light/search.svg">
             <img *ngIf="theme" class="icon icon-img {{theme}}" src="assets/images/dark/search.svg">
             <input [class.field-ch]="!!searchKey" [(ngModel)]="searchKey" type="text" class="input-field {{theme}} " ngModel placeholder="Search"  id="serch" #search >
-            <img *ngIf="!!searchKey" class="icon icon-right icon-img {{theme}}" src="assets/images/common/reject_icon.png">
+            <img *ngIf="!!searchKey" (click)="searchKey=''" class="icon icon-right icon-img {{theme}}" src="assets/images/common/reject_icon.png">
         </div>
         <cdk-virtual-scroll-viewport itemSize="50" class="sidenav top-sidenav">
             <div  *cdkVirtualFor="let user of pendingqueries | pendingQueries:searchKey; let i = index;">

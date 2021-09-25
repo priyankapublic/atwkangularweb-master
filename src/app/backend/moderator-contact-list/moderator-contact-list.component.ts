@@ -109,7 +109,7 @@ export class ModeratorContactListComponent implements OnInit {
       data => {  this.spinner.hide();this.userList = data;  this.msgcountReloadService.mcReloadFun(this.userList.length);
         if(!this.mobileQuery.matches){
           // if(chk){
-            this.currentUser(0);
+            //this.currentUser(0);
         //  }
         }
        } ,
